@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Base do documento. O visual do site fica em performei.css (classes .pf-*). */
+
+html {
+  background: #12163a;
+}
+
+:focus-visible {
+  outline: 2px solid #63c8fe;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

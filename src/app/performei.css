@@ -1,0 +1,168 @@
+/* Site Performei: tudo preso em .pf para não vazar para o site da Slick. */
+
+.pf {
+  --pf-noite: #12163a;
+  --pf-tinta: #1c2149;
+  --pf-azul: #63c8fe;
+  --pf-curva: cubic-bezier(0.16, 1, 0.3, 1);
+  --pf-curva-io: cubic-bezier(0.65, 0, 0.35, 1);
+  font-family: var(--font-poppins), system-ui, sans-serif;
+}
+
+/* ---------- Tipografia ---------- */
+
+.pf-titulo {
+  font-family: var(--font-bricolage), var(--font-poppins), system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+.pf-titulo em { font-style: normal; }
+
+.pf-mono { font-family: var(--font-pf-mono), ui-monospace, monospace; }
+
+/* Marca-texto azul (a "tarja"), funciona em fundo escuro e claro. */
+.pf-tarja {
+  background: var(--pf-azul);
+  color: var(--pf-noite);
+  padding: 0 0.12em;
+  margin: 0 -0.02em;
+  border-radius: 0.1em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.pf-tarja-anim {
+  background: linear-gradient(var(--pf-azul), var(--pf-azul)) no-repeat left / 0% 100%;
+  animation: pf-pinta 0.8s var(--pf-curva-io) both;
+  animation-delay: var(--d, 0.6s);
+}
+@keyframes pf-pinta {
+  from { background-size: 0% 100%; color: #fff; }
+  to { background-size: 100% 100%; color: var(--pf-noite); }
+}
+
+
+/* ---------- Entradas ---------- */
+
+@keyframes pf-sobe {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pf-aparece {
+  from { opacity: 0; transform: scale(1.05) translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+.pf-entra { animation: pf-sobe 1s var(--pf-curva) both; animation-delay: var(--d, 0ms); }
+.pf-entra-foto { animation: pf-aparece 1.6s var(--pf-curva) both; animation-delay: 200ms; }
+
+/* Enquanto o preloader está na tela, as entradas do topo esperam. */
+html[data-pf-carregando] .pf-entra,
+html[data-pf-carregando] .pf-entra-foto,
+html[data-pf-carregando] .pf-tarja-anim { animation-play-state: paused; }
+
+.pf-anim [data-revelar] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s var(--pf-curva), transform 1s var(--pf-curva);
+  transition-delay: var(--d, 0ms);
+}
+.pf-anim [data-revelar].pf-visivel { opacity: 1; transform: none; }
+
+/* ---------- Preloader: o "m" se desenha e a cortina sobe ---------- */
+
+.pf-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: var(--pf-noite);
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.pf-preloader.pf-sai { clip-path: inset(0 0 100% 0); }
+html[data-pf-visto] .pf-preloader { display: none; }
+.pf-preloader path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: pf-desenha 1.1s var(--pf-curva-io) forwards;
+}
+.pf-preloader path + path { animation-delay: 0.35s; }
+@keyframes pf-desenha { to { stroke-dashoffset: 0; } }
+.pf-preloader .pf-preloader-nome { animation: pf-sobe 0.8s var(--pf-curva) 0.55s both; }
+
+/* ---------- Granulado ---------- */
+
+.pf-grao {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Botões e links ---------- */
+
+.pf-botao { position: relative; overflow: hidden; isolation: isolate; transition: color 0.45s var(--pf-curva-io), border-color 0.45s, transform 0.3s; }
+.pf-botao::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--pf-preenche, #fff);
+  transform: translateY(101%);
+  transition: transform 0.55s var(--pf-curva-io);
+}
+.pf-botao:hover::before, .pf-botao:focus-visible::before { transform: none; }
+.pf-botao .pf-seta { transition: transform 0.55s var(--pf-curva-io); }
+.pf-botao:hover .pf-seta { transform: translateX(4px); }
+
+.pf-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.5s var(--pf-curva-io);
+}
+.pf-link:hover, .group:hover .pf-link { background-size: 100% 1px; }
+
+/* ---------- FAQ ---------- */
+
+.pf-faq[open] > div { animation: pf-sobe 0.5s var(--pf-curva) both; }
+.pf iframe { border: 0; }
+
+/* ---------- Antes × depois: o improviso é riscado ao entrar na tela ---------- */
+
+.pf-risco {
+  background: linear-gradient(#1a7bb8, #1a7bb8) no-repeat 0 58% / 100% 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.pf-anim .pf-risco { background-size: 0% 2px; transition: background-size 0.9s var(--pf-curva-io) 0.45s; }
+.pf-anim .pf-visivel .pf-risco { background-size: 100% 2px; }
+.pf-anim .pf-depois { opacity: 0; transform: translateX(-16px); transition: opacity 0.8s var(--pf-curva) 0.9s, transform 0.8s var(--pf-curva) 0.9s; }
+.pf-anim .pf-visivel .pf-depois { opacity: 1; transform: none; }
+
+/* ---------- Desenhos dos serviços ---------- */
+
+@keyframes pf-varre { 0%, 100% { transform: translateY(-52px); } 50% { transform: translateY(52px); } }
+.pf-scan { animation: pf-varre 3.2s ease-in-out infinite; }
+@keyframes pf-pulso { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+.pf-pulsa { animation: pf-pulso 1.6s ease-in-out infinite; }
+
+.pf-barra { transform-box: fill-box; transform-origin: bottom; }
+.pf-anim .pf-barra { transform: scaleY(0); transition: transform 0.9s var(--pf-curva); }
+.pf-anim .pf-visivel .pf-barra { transform: none; }
+
+.pf-traco-svg { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.pf-anim .pf-traco-svg { stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s var(--pf-curva-io) 0.6s; }
+.pf-anim .pf-visivel .pf-traco-svg { stroke-dashoffset: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-entra, .pf-entra-foto, .pf-tarja-anim, .pf-scan, .pf-pulsa { animation: none; }
+  .pf-tarja-anim { background-size: 100% 100%; color: var(--pf-noite); }
+  .pf-botao::before, .pf-link, .pf-botao .pf-seta { transition: none; }
+}
