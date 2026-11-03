@@ -23,3 +23,12 @@ O Rubens vê os pedidos no portal do cliente, aba "Meu site".
 
 Configure `SLICK_API_URL` e `SLICK_SITE_KEY` (veja `.env.example`) na Vercel e no `.env.local`.
 Sem elas, o site funciona normalmente e só não envia para o painel.
+
+## Conteúdo editável (painel da Slick)
+
+Os textos, fotos e listas da página vêm do painel (`src/slick/`). Os textos atuais ficam como padrão em
+`src/slick/estrutura.ts`: valem enquanto o cliente não publicar nada (e o site funciona igual sem o painel).
+
+- Mudou campos em `estrutura.ts`? Depois do deploy, no administrativo: **Editar conteúdo → Atualizar estrutura do site**.
+- Marcações nos textos: `*destaque azul*`, `**negrito**`, `~apagado~`.
+- O painel avisa o site ao publicar (`/api/slick/revalidar`); o cache também expira sozinho em 5 min.

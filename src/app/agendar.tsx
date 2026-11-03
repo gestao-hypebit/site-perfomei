@@ -39,7 +39,7 @@ function utmDaUrl() {
 const campo =
   "w-full border-0 border-b border-white/25 bg-transparent px-0 py-3 text-[16px] text-white placeholder:text-white/35 transition-colors focus:border-[#63C8FE] focus:outline-none focus:ring-0";
 
-export function FormAgendar() {
+export function FormAgendar({ whats }: { whats: string }) {
   const [periodo, setPeriodo] = useState(PERIODOS[0]);
   const [telefone, setTelefone] = useState("");
 
@@ -58,7 +58,7 @@ export function FormAgendar() {
       `Melhor período: ${periodo}`,
     ].join("\n");
     // Abre primeiro, ainda dentro do clique: depois de um await o navegador bloquearia a janela.
-    window.open(linkWhats(msg), "_blank", "noopener");
+    window.open(linkWhats(msg, whats), "_blank", "noopener");
     void enviarAgendamento({
       nome,
       telefone,
