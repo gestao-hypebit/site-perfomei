@@ -107,45 +107,110 @@ function Nav() {
 
 /* ---------- Hero ---------- */
 
-function Hero({ c, contatos }: { c: Conteudo["hero"]; contatos: Contatos }) {
-  return (
-    <section id="inicio" className="relative flex min-h-[100svh] flex-col overflow-hidden pt-28 sm:pt-32">
-      <div aria-hidden className="pointer-events-none absolute right-[-15%] top-[-10%] h-[680px] w-[680px] rounded-full bg-[#63C8FE]/20 blur-[150px]" />
-      <div aria-hidden className="pointer-events-none absolute bottom-0 left-[-10%] h-[420px] w-[420px] rounded-full bg-[#2B86D6]/20 blur-[140px]" />
-      <IconePerformei id="pm-fundo" className="pointer-events-none absolute -left-24 top-24 hidden h-[760px] w-auto opacity-[0.035] lg:block" />
+// Ícones da faixa escura do topo, pela posição (os textos vêm do painel).
+const ICONES_DIFERENCIAIS = [
+  <><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4.5 4.5" /><path d="M8.5 11h5" /></>,
+  <><path d="M4 19V5" /><path d="M4 19h16" /><path d="m7.5 14.5 3.5-4 3 2.5 5-6" /></>,
+  <><path d="M5 21V4" /><path d="M5 4h12l-2.5 3.5L17 11H5" /></>,
+  <><circle cx="9" cy="8" r="3.5" /><path d="M3 20a6 6 0 0 1 12 0" /><path d="m16 11 2 2 3.5-4" /></>,
+];
 
-      <div className="relative mx-auto grid w-full max-w-[1320px] flex-1 items-center gap-6 px-5 sm:px-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-4">
-        <div className="pb-6 lg:pb-16">
-          <h1 className="pf-titulo pf-entra text-[3.05rem] leading-[0.96] sm:text-[4.6rem] lg:text-[5.4rem] xl:text-[6.2rem]" style={atraso(100)}>
-            <Rico texto={c.titulo} destaque="pf-tarja pf-tarja-anim" estiloDestaque={atraso(900)} />
+function Icone({ children, className = "h-5 w-5" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className={className} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      {children}
+    </svg>
+  );
+}
+
+// Selo redondo no "morro" da faixa escura: o "P" da marca com as três frentes girando em volta.
+function SeloGiratorio() {
+  const texto = "DIAGNÓSTICO · FINANÇAS · ESTRATÉGIA · ";
+  return (
+    <div className="relative h-[124px] w-[124px] sm:h-[148px] sm:w-[148px]">
+      <div aria-hidden className="absolute inset-[-18px] rounded-full bg-[#63C8FE]/25 blur-2xl" />
+      <div className="relative h-full w-full rounded-full bg-[radial-gradient(circle_at_50%_35%,#24306E,#12163A_70%)] shadow-[0_0_0_1px_rgba(99,200,254,0.35),0_20px_50px_-15px_rgba(10,20,60,0.8),inset_0_0_30px_rgba(99,200,254,0.18)]">
+        <svg viewBox="0 0 100 100" className="pf-gira absolute inset-0 h-full w-full" aria-hidden>
+          <defs><path id="pf-selo-arco" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0" /></defs>
+          <text fill="#63C8FE" fontSize="7.4" letterSpacing="1.6" fontFamily="var(--font-texto)" fontWeight="700">
+            <textPath href="#pf-selo-arco" textLength="236">{texto}</textPath>
+          </text>
+        </svg>
+        <div className="absolute inset-[27%] flex items-center justify-center rounded-full border border-[#63C8FE]/30 bg-[#12163A]">
+          <IconePerformei id="pm-selo" className="h-[52%] w-auto" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Hero({ c }: { c: Conteudo["hero"] }) {
+  return (
+    <section id="inicio" className="relative overflow-hidden bg-[#EEF5FC] text-[#12163A]">
+      {/* Fundo: luz azul, anéis finos atrás da foto e uma grade de pontos bem leve */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_35%,#FFFFFF_0%,transparent_55%),radial-gradient(ellipse_at_0%_100%,rgba(99,200,254,0.28),transparent_50%)]" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.5] [background-image:radial-gradient(rgba(18,22,58,0.13)_1px,transparent_1px)] [background-size:26px_26px] [mask-image:linear-gradient(to_bottom,black,transparent_75%)]" />
+      <div aria-hidden className="pointer-events-none absolute left-1/2 top-[44%] h-[1100px] w-[1100px] -translate-x-1/2 -translate-y-1/2 lg:left-[62%]">
+        <div className="absolute inset-[30%] rounded-full bg-[#63C8FE]/35 blur-[90px]" />
+        {[0, 1, 2, 3].map((k) => (
+          <div key={k} className="pf-anel absolute rounded-full border border-[#1A7BB8]/[0.13]" style={{ inset: `${18 + k * 8}%`, ...atraso(400 + k * 150) }} />
+        ))}
+      </div>
+
+      <div className="relative mx-auto grid w-full max-w-[1320px] px-5 pt-28 sm:px-10 sm:pt-32 lg:min-h-[min(100svh,900px)] lg:grid-cols-[1fr_1fr] lg:pt-24">
+        {/* Texto */}
+        <div className="relative z-10 flex flex-col justify-center pb-4 lg:pb-[150px]">
+          <h1 className="pf-titulo pf-entra text-[2.9rem] leading-[0.98] sm:text-[4.2rem] lg:text-[4.4rem] xl:text-[5.1rem]" style={atraso(140)}>
+            <Rico texto={c.titulo} destaque="pf-tarja pf-tarja-anim [--pf-tarja-de:#12163A]" estiloDestaque={atraso(900)} />
           </h1>
-          <p className="pf-entra mt-8 max-w-[33rem] text-[17px] leading-[1.7] text-white/70 sm:text-lg" style={atraso(250)}>
-            {c.texto}
+          <p className="pf-entra mt-7 max-w-[31rem] text-[17px] leading-[1.7] text-[#12163A]/65 sm:text-[18px]" style={atraso(260)}>
+            <Rico texto={c.texto} negrito="font-semibold text-[#12163A]" />
           </p>
-          <div className="pf-entra mt-10 flex flex-wrap items-center gap-3" style={atraso(380)}>
-            <a href="#agendar" className="pf-botao group inline-flex items-center gap-3 rounded-full bg-[#63C8FE] px-7 py-4 text-[15px] font-semibold text-[#12163A]">
-              {c.botao} <Seta />
-            </a>
-            <a href={contatos.whatsOi} target="_blank" rel="noopener" className="inline-flex items-center gap-2.5 rounded-full border border-white/15 px-7 py-4 text-[15px] font-medium text-white/85 transition-colors hover:border-[#63C8FE] hover:text-[#63C8FE]">
-              <IconeWhats /> {c.botao_whats}
+          <div className="pf-entra mt-9 flex" style={atraso(380)}>
+            <a href="#agendar" className="pf-botao inline-flex items-center rounded-full bg-[#12163A] px-7 py-4 text-[15px] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(18,22,58,0.6)] [--pf-preenche:#63C8FE] hover:text-[#12163A]">
+              {c.botao}
             </a>
           </div>
         </div>
 
-        <div className="relative h-[430px] sm:h-[540px] lg:h-full lg:min-h-[600px]">
-          <div className="pf-entra-foto absolute inset-x-[4%] bottom-0 top-[4%] overflow-hidden rounded-t-[999px] ring-1 ring-white/10">
-            <Image src={c.foto} alt={`${c.selo_nome}, Performei Consultoria`} fill priority sizes="(min-width: 1024px) 480px, 92vw" className="object-cover object-[50%_22%]" />
-            <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#12163A] via-transparent to-transparent" />
+        {/* Foto recortada */}
+        <div className="relative h-[480px] sm:h-[600px] lg:h-auto">
+          <div className="pf-entra-foto absolute bottom-0 left-1/2 h-full w-full max-w-[560px] -translate-x-1/2 lg:left-[44%] lg:top-[4%] lg:h-auto">
+            <Image src={c.foto} alt={`${c.selo_nome}, Performei Consultoria`} fill priority sizes="(min-width: 1024px) 560px, 92vw"
+              className="object-contain object-bottom drop-shadow-[0_30px_40px_rgba(18,22,58,0.25)]" />
           </div>
+        </div>
+      </div>
 
-          <div className="pf-entra absolute left-0 top-[52%] hidden w-[200px] sm:block rotate-[-4deg] rounded-2xl border border-white/15 bg-[#12163A]/75 p-4 shadow-2xl backdrop-blur-md sm:w-[220px] lg:-left-12" style={atraso(1100)}>
-            <p className="pf-mono text-[10px] uppercase tracking-[0.16em] text-white/45">Lucro do mês</p>
-            <p className="pf-titulo mt-1.5 text-[2rem] leading-none">R$ <span className="text-[#63C8FE]">???</span></p>
-            <p className="mt-2 text-[12px] leading-snug text-white/60">Não sabe de cabeça? A gente precisa conversar.</p>
+      {/* Faixa escura: sobe num "morro" em volta do selo e emenda com a seção seguinte */}
+      <div className="relative z-20 -mt-[70px] sm:-mt-[90px] lg:-mt-[150px]">
+        {/* Mesma grade do topo, para o morro e o selo ficarem centrados sob a foto */}
+        <div className="pointer-events-none relative z-10 mx-auto grid max-w-[1320px] px-5 sm:px-10 lg:grid-cols-2">
+          <div className="hidden lg:block" />
+          <div className="relative h-0">
+            <svg aria-hidden viewBox="0 0 420 72" preserveAspectRatio="none" className="absolute bottom-[-1px] left-1/2 h-[72px] w-[400px] -translate-x-1/2 text-[#12163A] lg:left-[44%] lg:w-[460px]">
+              <path d="M0 72C120 72 118 0 210 0s90 72 210 72Z" fill="currentColor" />
+            </svg>
+            <div className="pf-entra absolute bottom-[-34px] left-1/2 -translate-x-1/2 lg:left-[44%]" style={atraso(900)}>
+              <SeloGiratorio />
+            </div>
           </div>
-          <div className="pf-entra absolute bottom-[14%] right-0 rotate-[3deg] rounded-2xl bg-[#63C8FE] px-4 py-3 text-[#12163A] shadow-2xl sm:right-2" style={atraso(1250)}>
-            <p className="pf-mono text-[10px] font-semibold uppercase tracking-[0.14em] opacity-70">{c.selo_nome}</p>
-            <p className="text-[13px] font-semibold">{c.selo_cargo}</p>
+        </div>
+        <div className="relative rounded-t-[2.5rem] bg-[#12163A] sm:rounded-t-[3rem]">
+          <div className="relative mx-auto max-w-[1320px] px-5 pb-10 pt-[88px] sm:px-10 sm:pb-14 lg:pt-14">
+            <ul className="grid grid-cols-2 gap-x-5 gap-y-8 text-white lg:grid-cols-4 lg:gap-0">
+              {c.diferenciais.map((d, i) => (
+                <li key={d._id} className={`pf-entra flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4 lg:px-8 ${i > 0 ? "lg:border-l lg:border-white/10" : "lg:pl-0"}`} style={atraso(1300 + i * 110)}>
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#63C8FE]/35 bg-[#63C8FE]/[0.08] text-[#63C8FE]">
+                    <Icone>{ICONES_DIFERENCIAIS[i % ICONES_DIFERENCIAIS.length]}</Icone>
+                  </span>
+                  <span>
+                    <span className="block text-[15px] font-semibold leading-snug sm:text-[16px]">{d.titulo}</span>
+                    <span className="mt-1 block text-[13.5px] leading-[1.55] text-white/55">{d.texto}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
@@ -488,18 +553,12 @@ function Duvidas({ c, contatos }: { c: Conteudo["duvidas"]; contatos: Contatos }
 /* ---------- Agendar: formulário (abre o WhatsApp) + contatos + mapa ---------- */
 
 function Agendar({ c, ct, contatos }: { c: Conteudo["agendar"]; ct: Conteudo["contatos"]; contatos: Contatos }) {
-  const lista = [
-    { rotulo: "WhatsApp", valor: ct.whatsapp, href: contatos.whatsOi },
-    ...(contatos.email ? [{ rotulo: "E-mail", valor: contatos.email, href: `mailto:${contatos.email}` }] : []),
-    { rotulo: "Instagram", valor: ct.instagram_usuario, href: contatos.insta },
-    { rotulo: "Onde estou", valor: ct.endereco, href: "#mapa" },
-  ];
   return (
     <section id="agendar" className="relative scroll-mt-24 overflow-hidden px-5 pt-24 sm:px-10 sm:pt-36">
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-40 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-[#63C8FE]/15 blur-[160px]" />
-      <div className="relative mx-auto max-w-[1320px]">
+      <div className="relative mx-auto max-w-[760px]">
         <div className="text-center">
-          <h2 data-revelar className="pf-titulo mx-auto max-w-[11em] text-[3rem] leading-[0.95] sm:text-[5rem] lg:text-[6.4rem]">
+          <h2 data-revelar className="pf-titulo mx-auto max-w-[11em] text-[3rem] leading-[0.95] sm:text-[4.6rem] lg:text-[5.4rem]">
             <Rico texto={c.titulo} />
           </h2>
           <p data-revelar style={atraso(150)} className="mx-auto mt-7 max-w-xl text-[17px] leading-[1.7] text-white/65">
@@ -507,45 +566,15 @@ function Agendar({ c, ct, contatos }: { c: Conteudo["agendar"]; ct: Conteudo["co
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-[0.78fr_1.22fr]">
-          <div className="grid content-start gap-3">
-            <figure data-revelar className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
-              <div className="relative aspect-[5/4]">
-                <Image src={c.foto} alt="" fill sizes="(min-width: 1024px) 480px, 100vw" className="object-cover object-[50%_28%]" />
-                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#12163A] via-[#12163A]/10 to-transparent" />
-                <figcaption className="absolute inset-x-0 bottom-0 p-6">
-                  <p className="pf-titulo text-[1.3rem] leading-[1.2] tracking-[-0.02em]">
-                    “{c.citacao}”
-                  </p>
-                  <p className="mt-2 text-[13px] text-white/60">Rubens Queiroz</p>
-                </figcaption>
-              </div>
-            </figure>
-            {lista.map((c) => (
-              <a key={c.rotulo} data-revelar href={c.href} {...(c.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
-                className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-4 transition-colors hover:border-[#63C8FE]/60">
-                <span className="min-w-0">
-                  <span className="pf-mono block text-[11px] uppercase tracking-[0.14em] text-white/45">{c.rotulo}</span>
-                  <span className="mt-1 block break-words text-[15.5px]">{c.valor}</span>
-                </span>
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 transition-all duration-500 group-hover:-rotate-45 group-hover:border-[#63C8FE] group-hover:bg-[#63C8FE] group-hover:text-[#12163A]">
-                  <Seta className="h-4 w-4" />
-                </span>
-              </a>
-            ))}
-          </div>
-
-          <div data-revelar style={atraso(150)} className="self-start rounded-3xl border border-white/10 bg-[#1C2149]/80 p-6 backdrop-blur sm:p-10 lg:sticky lg:top-28">
-            <p className="pf-titulo text-[1.7rem] leading-[1.1] tracking-[-0.03em] sm:text-[2.1rem]">{c.form_titulo}</p>
-            <p className="mt-3 mb-10 max-w-md text-[15.5px] leading-[1.6] text-white/60">{c.form_texto}</p>
-            <FormAgendar whats={contatos.whats} />
-          </div>
+        <div data-revelar style={atraso(250)} className="mt-14 rounded-3xl border border-white/10 bg-[#1C2149]/80 p-6 backdrop-blur sm:p-10">
+          <FormAgendar whats={contatos.whats} />
         </div>
+        <p data-revelar style={atraso(300)} className="mx-auto mt-5 max-w-md text-center text-[14px] leading-[1.6] text-white/50">{c.form_texto}</p>
+      </div>
 
-        <div id="mapa" data-revelar className="relative mt-6 h-[300px] overflow-hidden rounded-3xl border border-white/10 sm:h-[360px]">
-          <iframe title={`Mapa: ${ct.endereco}`} src={`https://www.google.com/maps?q=${encodeURIComponent(ct.endereco_mapa)}&z=16&output=embed`}
-            loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="absolute inset-0 h-full w-full opacity-80 grayscale invert-[0.92] hue-rotate-180" />
-        </div>
+      <div id="mapa" data-revelar className="relative mx-auto mt-16 h-[300px] max-w-[1320px] overflow-hidden rounded-3xl border border-white/10 sm:h-[360px]">
+        <iframe title={`Mapa: ${ct.endereco}`} src={`https://www.google.com/maps?q=${encodeURIComponent(ct.endereco_mapa)}&z=16&output=embed`}
+          loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="absolute inset-0 h-full w-full" />
       </div>
     </section>
   );
@@ -564,7 +593,9 @@ function Rodape({ contatos }: { contatos: Contatos }) {
         </div>
         <p className="pf-mono mt-8 flex flex-col gap-2 text-[11px] uppercase tracking-[0.14em] text-white/40 sm:flex-row sm:justify-between">
           <span>© {new Date().getFullYear()} Performei Consultoria · Belém/PA</span>
-          <span>Consultoria para pequenas empresas</span>
+          <a href="https://www.agenciaslick.com.br/" target="_blank" rel="noopener" className="group inline-flex items-center gap-1.5 transition-colors hover:text-white">
+            Site desenvolvido pela <span className="pf-link pb-0.5 font-semibold text-white/70 group-hover:text-[#63C8FE]">Agência Slick</span>
+          </a>
         </p>
       </div>
     </footer>
@@ -611,7 +642,7 @@ export default async function PerformeiSite() {
       <Coreografia />
       <Nav />
       <main>
-        <Hero c={c.hero} contatos={contatos} />
+        <Hero c={c.hero} />
         <Painel />
         <Diferenca c={c.diferenca} />
         <Servicos c={c.servicos} />

@@ -38,12 +38,24 @@ export const ESTRUTURA = {
     descricao: "A primeira coisa que o visitante vê.",
     campos: {
       titulo: { tipo: "texto", rotulo: "Título", max: 90, ajuda: DESTAQUE, padrao: "Você trabalha muito. Falta *enxergar o resultado*." },
-      texto: { tipo: "textarea", rotulo: "Texto abaixo do título", max: 320, padrao: "A Performei organiza as finanças, os preços e a rotina da sua empresa para você decidir com clareza. Consultoria de verdade, na língua de quem toca o negócio todo dia." },
+      texto: { tipo: "textarea", rotulo: "Texto abaixo do título", max: 320, ajuda: "Use **dois asteriscos** para negrito.", padrao: "A Performei organiza as finanças, os preços e a rotina da sua empresa para você decidir com clareza. **Consultoria de verdade, na língua de quem toca o negócio.**" },
       botao: { tipo: "texto", rotulo: "Botão principal", max: 30, padrao: "Agendar um horário" },
-      botao_whats: { tipo: "texto", rotulo: "Botão do WhatsApp", max: 30, padrao: "Chamar no WhatsApp" },
-      foto: { tipo: "imagem", rotulo: "Foto", ajuda: "Foto vertical, com o rosto na parte de cima.", padrao: "/fotos/rubens-bracos-cruzados.jpg" },
-      selo_nome: { tipo: "texto", rotulo: "Selo azul: nome", max: 40, padrao: "Rubens Queiroz" },
-      selo_cargo: { tipo: "texto", rotulo: "Selo azul: cargo", max: 50, padrao: "Administrador · CRA-PA" },
+      foto: { tipo: "imagem", rotulo: "Foto (sem fundo)", ajuda: "PNG ou WebP com fundo transparente, pessoa recortada da cintura para cima.", padrao: "/fotos/rubens-recorte.webp" },
+      selo_nome: { tipo: "texto", rotulo: "Nome de quem está na foto", max: 40, padrao: "Rubens Queiroz" },
+      diferenciais: {
+        tipo: "lista", rotulo: "Faixa escura do topo", itemRotulo: "Item", min: 2, maxItens: 4,
+        ajuda: "Os ícones seguem a ordem: diagnóstico, finanças, estratégia, acompanhamento.",
+        campos: {
+          titulo: { tipo: "texto", rotulo: "Título", max: 30 },
+          texto: { tipo: "texto", rotulo: "Texto", max: 70 },
+        },
+        padrao: [
+          { titulo: "Diagnóstico empresarial", texto: "Raio-x de finanças, preços e operação." },
+          { titulo: "Consultoria financeira", texto: "Caixa organizado e preço com margem real." },
+          { titulo: "Planejamento estratégico", texto: "Metas, plano e processos definidos." },
+          { titulo: "Acompanhamento de perto", texto: "Do diagnóstico até sair do papel." },
+        ],
+      },
     },
   },
   diferenca: {
@@ -182,10 +194,7 @@ export const ESTRUTURA = {
     campos: {
       titulo: { tipo: "texto", rotulo: "Título", max: 60, ajuda: DESTAQUE, padrao: "Bora colocar *ordem na casa*?" },
       texto: { tipo: "textarea", rotulo: "Texto abaixo do título", max: 240, padrao: "Um bate-papo de 30 minutos, sem compromisso. A gente conversa sobre a sua empresa e você tira todas as dúvidas." },
-      foto: { tipo: "imagem", rotulo: "Foto", padrao: "/fotos/rubens-retrato.jpg" },
-      citacao: { tipo: "textarea", rotulo: "Frase sobre a foto", max: 160, padrao: "Não sou o sabichão que tem todas as respostas. Sou o parceiro que faz as perguntas certas." },
-      form_titulo: { tipo: "texto", rotulo: "Título do formulário", max: 70, padrao: "Me conta rapidinho sobre a sua empresa." },
-      form_texto: { tipo: "textarea", rotulo: "Texto do formulário", max: 200, padrao: "Leva 30 segundos. A mensagem chega no meu WhatsApp e eu respondo para combinar o melhor dia e horário." },
+      form_texto: { tipo: "textarea", rotulo: "Aviso abaixo do formulário", max: 200, padrao: "Leva 30 segundos. A mensagem chega no meu WhatsApp e eu respondo para combinar o melhor dia e horário." },
     },
   },
   contatos: {
@@ -195,8 +204,7 @@ export const ESTRUTURA = {
       whatsapp: { tipo: "texto", rotulo: "WhatsApp", max: 20, ajuda: "Com DDD, ex.: (91) 98404-7100. É para onde vão os agendamentos.", padrao: "(91) 98404-7100" },
       email: { tipo: "texto", rotulo: "E-mail", max: 80, padrao: "performeiconsultoria@gmail.com" },
       instagram: { tipo: "link", rotulo: "Link do Instagram", padrao: "https://www.instagram.com/performeiconsultoria/" },
-      instagram_usuario: { tipo: "texto", rotulo: "Usuário do Instagram", max: 40, padrao: "@performeiconsultoria" },
-      endereco: { tipo: "texto", rotulo: "Endereço (como aparece)", max: 120, padrao: "Do It Hub · Rua Avertano Rocha, 192 · Campina, Belém" },
+      endereco: { tipo: "texto", rotulo: "Endereço (título do mapa)", max: 120, padrao: "Do It Hub · Rua Avertano Rocha, 192 · Campina, Belém" },
       endereco_mapa: { tipo: "texto", rotulo: "Endereço para o mapa", max: 160, ajuda: "Endereço completo, do jeito que você buscaria no Google Maps.", padrao: "Rua Avertano Rocha, 192 - Campina, Belém - PA, 66023-120" },
     },
   },

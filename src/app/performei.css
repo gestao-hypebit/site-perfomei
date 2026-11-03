@@ -6,20 +6,21 @@
   --pf-azul: #63c8fe;
   --pf-curva: cubic-bezier(0.16, 1, 0.3, 1);
   --pf-curva-io: cubic-bezier(0.65, 0, 0.35, 1);
-  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-family: var(--font-texto), system-ui, sans-serif;
 }
 
 /* ---------- Tipografia ---------- */
 
 .pf-titulo {
-  font-family: var(--font-bricolage), var(--font-poppins), system-ui, sans-serif;
+  font-family: var(--font-bricolage), var(--font-texto), system-ui, sans-serif;
   font-weight: 800;
   letter-spacing: -0.045em;
   text-wrap: balance;
 }
 .pf-titulo em { font-style: normal; }
 
-.pf-mono { font-family: var(--font-pf-mono), ui-monospace, monospace; }
+/* Rótulos pequenos (antes em fonte mono): mesma fonte do texto, mais pesada. */
+.pf-mono { font-family: var(--font-texto), system-ui, sans-serif; font-weight: 600; }
 
 /* Marca-texto azul (a "tarja"), funciona em fundo escuro e claro. */
 .pf-tarja {
@@ -37,7 +38,7 @@
   animation-delay: var(--d, 0.6s);
 }
 @keyframes pf-pinta {
-  from { background-size: 0% 100%; color: #fff; }
+  from { background-size: 0% 100%; color: var(--pf-tarja-de, #fff); }
   to { background-size: 100% 100%; color: var(--pf-noite); }
 }
 
@@ -67,6 +68,14 @@ html[data-pf-carregando] .pf-tarja-anim { animation-play-state: paused; }
   transition-delay: var(--d, 0ms);
 }
 .pf-anim [data-revelar].pf-visivel { opacity: 1; transform: none; }
+
+/* ---------- Hero: anéis e selo girando ---------- */
+
+@keyframes pf-anel-entra { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: none; } }
+.pf-anel { animation: pf-anel-entra 1.8s var(--pf-curva) both; animation-delay: var(--d, 0ms); }
+@keyframes pf-giro { to { transform: rotate(360deg); } }
+.pf-gira { animation: pf-giro 22s linear infinite; }
+html[data-pf-carregando] .pf-anel { animation-play-state: paused; }
 
 /* ---------- Preloader: o "m" se desenha e a cortina sobe ---------- */
 
@@ -162,7 +171,7 @@ html[data-pf-visto] .pf-preloader { display: none; }
 .pf-anim .pf-visivel .pf-traco-svg { stroke-dashoffset: 0; }
 
 @media (prefers-reduced-motion: reduce) {
-  .pf-entra, .pf-entra-foto, .pf-tarja-anim, .pf-scan, .pf-pulsa { animation: none; }
+  .pf-entra, .pf-entra-foto, .pf-tarja-anim, .pf-scan, .pf-pulsa, .pf-anel, .pf-gira { animation: none; }
   .pf-tarja-anim { background-size: 100% 100%; color: var(--pf-noite); }
   .pf-botao::before, .pf-link, .pf-botao .pf-seta { transition: none; }
 }

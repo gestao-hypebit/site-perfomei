@@ -67,8 +67,8 @@ export function Painel() {
                     stroke="rgba(255,255,255,0.35)" strokeWidth={i % 3 === 0 ? 2 : 1} strokeLinecap="round" />
                 );
               })}
-              <text x="22" y="178" fill="rgba(255,255,255,0.4)" fontSize="9" fontFamily="var(--font-pf-mono)">NO ESCURO</text>
-              <text x="140" y="178" fill="#63C8FE" fontSize="9" fontFamily="var(--font-pf-mono)">NO CONTROLE</text>
+              <text x="22" y="178" fill="rgba(255,255,255,0.4)" fontSize="9" fontFamily="var(--font-texto)" fontWeight="700">NO ESCURO</text>
+              <text x="140" y="178" fill="#63C8FE" fontSize="9" fontFamily="var(--font-texto)" fontWeight="700">NO CONTROLE</text>
               {/* Ponteiro: círculo invisível centrado em (0,0) para o giro acontecer no centro do mostrador */}
               <g transform="translate(110 110)">
                 <motion.g style={{ rotate: angulo }}>

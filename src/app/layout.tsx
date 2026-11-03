@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, JetBrains_Mono, Montserrat, Poppins } from "next/font/google";
+import { Bricolage_Grotesque, Montserrat, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import "./performei.css";
 
 // Site da Performei Consultoria (cliente da Slick).
-// Bricolage Grotesque (pesada, tamanho óptico) nos títulos, Poppins no texto,
-// JetBrains Mono nos rótulos, Montserrat só no logo (fonte da marca do cliente).
+// Bricolage Grotesque (pesada, tamanho óptico) nos títulos, Plus Jakarta Sans no texto
+// e nos rótulos, Montserrat só no logo (fonte da marca do cliente).
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -14,17 +14,10 @@ const bricolage = Bricolage_Grotesque({
   display: "swap",
 });
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const texto = Plus_Jakarta_Sans({
+  variable: "--font-texto",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
-  variable: "--font-pf-mono",
-  subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -60,7 +53,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="pt-BR" className="scroll-smooth" suppressHydrationWarning>
       <body className="bg-[#12163A]">
         <div
-          className={`pf ${poppins.variable} ${bricolage.variable} ${mono.variable} ${montserrat.variable} min-h-screen overflow-x-clip bg-[#12163A] text-white antialiased selection:bg-[#63C8FE] selection:text-[#12163A]`}
+          className={`pf ${texto.variable} ${bricolage.variable} ${montserrat.variable} min-h-screen overflow-x-clip bg-[#12163A] text-white antialiased selection:bg-[#63C8FE] selection:text-[#12163A]`}
         >
           {children}
         </div>
