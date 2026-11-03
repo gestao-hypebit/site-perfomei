@@ -3,6 +3,7 @@
 // Envia o pedido de agendamento para o painel da Slick (aparece para o Rubens no portal).
 // Roda no servidor: a chave do site (SLICK_SITE_KEY) nunca vai para o navegador.
 // Se o painel estiver fora ou sem configuração, não faz nada: o WhatsApp já abriu.
+// 
 
 type Agendamento = {
   nome: string;
