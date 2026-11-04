@@ -358,14 +358,14 @@ function Servicos({ c }: { c: Conteudo["servicos"] }) {
                   </div>
                   <p className="pf-titulo mt-7 text-[2.1rem] leading-[1.02] sm:text-[3rem] lg:text-[3.4rem]"><Rico texto={s.gancho} destaque={s.destaque} /></p>
                   <p className="mt-6 max-w-[34rem] text-[16.5px] leading-[1.7] opacity-70">{s.texto}</p>
-                  <ul className="mt-8 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+                  <ul className="mb-10 mt-8 grid gap-x-6 gap-y-3 sm:grid-cols-2 lg:mb-8">
                     {linhas(s.entregas, 6).map((e) => (
                       <li key={e} className="flex items-center gap-3 text-[15px] font-medium">
                         <span className="h-[7px] w-[7px] shrink-0 rotate-45 bg-current opacity-60" />{e}
                       </li>
                     ))}
                   </ul>
-                  <a href="#agendar" className={`pf-botao mt-10 inline-flex items-center gap-3 self-start rounded-full border border-current px-6 py-3.5 text-[14px] font-semibold lg:mt-auto ${s.botaoCls}`}>
+                  <a href="#agendar" className={`pf-botao mt-auto inline-flex items-center gap-3 self-start rounded-full border border-current px-6 py-3.5 text-[14px] font-semibold ${s.botaoCls}`}>
                     {s.botao} <Seta />
                   </a>
                 </div>

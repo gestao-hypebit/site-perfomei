@@ -38,7 +38,7 @@ export const ESTRUTURA = {
     descricao: "A primeira coisa que o visitante vê.",
     campos: {
       titulo: { tipo: "texto", rotulo: "Título", max: 90, ajuda: DESTAQUE, padrao: "Você trabalha muito. Falta *enxergar o resultado*." },
-      texto: { tipo: "textarea", rotulo: "Texto abaixo do título", max: 320, ajuda: "Use **dois asteriscos** para negrito.", padrao: "A Performei organiza as finanças, os preços e a rotina da sua empresa para você decidir com clareza. **Consultoria de verdade, na língua de quem toca o negócio.**" },
+      texto: { tipo: "textarea", rotulo: "Texto abaixo do título", max: 320, ajuda: "Use **dois asteriscos** para negrito.", padrao: "A Performei organiza as finanças, os preços e a rotina da sua empresa para você parar de decidir no escuro. **Consultoria de verdade, na língua de quem toca o negócio.**" },
       botao: { tipo: "texto", rotulo: "Botão principal", max: 30, padrao: "Agendar um horário" },
       foto: { tipo: "imagem", rotulo: "Foto (sem fundo)", ajuda: "PNG ou WebP com fundo transparente, pessoa recortada da cintura para cima.", padrao: "/fotos/rubens-recorte.webp" },
       selo_nome: { tipo: "texto", rotulo: "Nome de quem está na foto", max: 40, padrao: "Rubens Queiroz" },
@@ -50,7 +50,7 @@ export const ESTRUTURA = {
           texto: { tipo: "texto", rotulo: "Texto", max: 70 },
         },
         padrao: [
-          { titulo: "Diagnóstico empresarial", texto: "Raio-x de finanças, preços e operação." },
+          { titulo: "Diagnóstico empresarial", texto: "Raio-x do seu negócio com relatório de maturidade." },
           { titulo: "Consultoria financeira", texto: "Caixa organizado e preço com margem real." },
           { titulo: "Planejamento estratégico", texto: "Metas, plano e processos definidos." },
           { titulo: "Acompanhamento de perto", texto: "Do diagnóstico até sair do papel." },
@@ -62,7 +62,7 @@ export const ESTRUTURA = {
     titulo: "Antes × depois",
     descricao: "Comparação entre o improviso e a gestão com a Performei.",
     campos: {
-      titulo: { tipo: "texto", rotulo: "Título", max: 90, ajuda: `${DESTAQUE} Use ~til~ no trecho mais apagado.`, padrao: "Mesma empresa. ~Outro jeito de~ *tocar*." },
+      titulo: { tipo: "texto", rotulo: "Título", max: 90, ajuda: `${DESTAQUE} Use ~til~ no trecho mais apagado.`, padrao: "Mesma empresa. ~Outro jeito de~ *administrar*." },
       texto: { tipo: "textarea", rotulo: "Texto ao lado do título", max: 240, padrao: "O improviso sai riscado, a gestão entra no lugar. Não é mágica: é método, número e acompanhamento." },
       rotulo_antes: { tipo: "texto", rotulo: "Nome da coluna “antes”", max: 30, padrao: "No improviso" },
       rotulo_depois: { tipo: "texto", rotulo: "Nome da coluna “depois”", max: 30, padrao: "Com a Performei" },
@@ -86,8 +86,8 @@ export const ESTRUTURA = {
     titulo: "Serviços",
     descricao: "Os cartões que se empilham ao rolar. Cada posição tem uma cor fixa (branco, azul, escuro).",
     campos: {
-      titulo: { tipo: "texto", rotulo: "Título", max: 110, ajuda: DESTAQUE, padrao: "Três frentes, um objetivo: uma empresa que *dá lucro* e tem rumo." },
-      texto: { tipo: "textarea", rotulo: "Texto ao lado do título", max: 240, padrao: "Dá pra começar por uma delas ou combinar as três. O diagnóstico mostra qual faz mais diferença agora." },
+      titulo: { tipo: "texto", rotulo: "Título", max: 110, ajuda: DESTAQUE, padrao: "Três caminhos, um destino: uma empresa que *dá lucro* e tem rumo." },
+      texto: { tipo: "textarea", rotulo: "Texto ao lado do título", max: 240, padrao: "Você não precisa contratar tudo de uma vez. Comece pelo que mais dói hoje. O diagnóstico mostra qual caminho faz mais diferença agora e qual pode esperar." },
       itens: {
         tipo: "lista", rotulo: "Serviços", itemRotulo: "Serviço", min: 1, maxItens: 3,
         campos: {
@@ -98,9 +98,9 @@ export const ESTRUTURA = {
           botao: { tipo: "texto", rotulo: "Texto do botão", max: 30 },
         },
         padrao: [
-          { nome: "Diagnóstico empresarial", gancho: "Descubra *onde* o dinheiro está vazando.", texto: "O raio-x da empresa: finanças, preços e operação olhados de perto, para você saber o que resolver primeiro.", entregas: "Raio-x de 10 áreas da empresa\nRelatório de maturidade\nMapa de gargalos\nLista de prioridades", botao: "Quero meu diagnóstico" },
-          { nome: "Consultoria financeira", gancho: "Saiba quanto *sobra*, não só quanto entra.", texto: "Caixa organizado, dinheiro da empresa separado do seu e preço com margem real. Números que você entende e usa.", entregas: "Fluxo de caixa\nPrecificação com margem\nSeparação PF × PJ\nLeitura mensal dos números", botao: "Quero organizar o caixa" },
-          { nome: "Planejamento estratégico", gancho: "Uma empresa que anda *sem você* empurrando.", texto: "Metas possíveis, plano por etapas, processos e responsáveis definidos, e acompanhamento para tudo sair do papel.", entregas: "Metas e indicadores\nPlano de ação\nProcessos e funções\nAcompanhamento", botao: "Quero um plano" },
+          { nome: "Diagnóstico empresarial", gancho: "Descubra *onde* precisa de mais atenção antes que seja tarde demais.", texto: "O raio-x da empresa: em poucos dias você sabe exatamente o que está travando o crescimento e o que resolver primeiro.", entregas: "Raio-x das áreas do negócio\nRelatório de maturidade\nLista de prioridades\nPrincipais oportunidades de melhoria", botao: "Quero meu diagnóstico" },
+          { nome: "Consultoria financeira", gancho: "Descubra *onde* o dinheiro está vazando.", texto: "Caixa organizado, dinheiro da empresa separado do seu e preço calculado com margem real. Números que você entende e usa.", entregas: "Fluxo de caixa\nPrecificação com margem\nSeparação PF × PJ\nLeitura mensal dos números", botao: "Quero organizar o caixa" },
+          { nome: "Planejamento estratégico", gancho: "Uma empresa que anda *sem você* empurrando.", texto: "Metas possíveis, plano por etapas, processos e responsáveis definidos. E acompanhamento de verdade, para o plano não virar um PDF esquecido na pasta.", entregas: "Metas e indicadores\nPlano de ação\nProcessos e funções\nAcompanhamento", botao: "Quero um plano" },
         ],
       },
     },
@@ -158,7 +158,7 @@ export const ESTRUTURA = {
         },
         padrao: [
           { nome: "Renata Almeida", empresa: "Canto das Flores · Psicologia e Arte", destaque: "Um lugar que já era bom se tornou melhor ainda.", texto: "Rubens me trouxe uma perspectiva valiosa, identificando pontos de melhoria que muitas vezes passavam desapercebidos por mim. Suas recomendações práticas e estratégicas me permitiram ter mais saúde e tranquilidade em meu consultório. Também tenho obtido retornos tanto financeiro como de expansão de parcerias a partir dos planejamentos feitos pela consultoria. Recomendo fortemente a Performei!" },
-          { nome: "Heitor Pereira", empresa: "CEO · Heitor Pereira Curso de Idiomas", destaque: "Nos ajudaram a chegar onde estamos hoje.", texto: "Os serviços da Performei sempre foram super úteis e nos ajudaram a chegar onde estamos hoje. Sempre fomos bem atendidos com orientações técnicas de finanças e marketing que nos ajudaram a crescer. Muito obrigado, Rubens Queiroz." },
+          { nome: "Heitor Pereira", empresa: "CEO · Heitor Pereira Curso de Idiomas", destaque: "Nos ajudou a chegar onde estamos hoje.", texto: "Os serviços da Performei sempre foram super úteis e nos ajudou a chegar onde estamos hoje. Sempre fomos bem atendidos com orientações técnicas de finanças e marketing que nos ajudaram a crescer. Muito obrigado, Rubens." },
           { nome: "Vera Oyola", empresa: "Sol e Mar Piscinas e Saunas", destaque: "Muito importante para a organização da empresa.", texto: "A Performei vem sendo muito importante para a organização da empresa no âmbito financeiro e organizacional. Com as suas técnicas vem interagindo com a equipe de forma excelente, buscando o engajamento em todas as etapas do processo." },
         ],
       },
