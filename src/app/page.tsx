@@ -146,7 +146,7 @@ function SeloGiratorio() {
 
 function Hero({ c }: { c: Conteudo["hero"] }) {
   return (
-    <section id="inicio" className="relative overflow-hidden bg-[#EEF5FC] text-[#12163A]">
+    <section id="inicio" className="relative overflow-hidden bg-[#EEF5FC] text-[#12163A] lg:flex lg:min-h-[min(100svh,1000px)] lg:flex-col">
       {/* Fundo: luz azul, anéis finos atrás da foto e uma grade de pontos bem leve */}
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_35%,#FFFFFF_0%,transparent_55%),radial-gradient(ellipse_at_0%_100%,rgba(99,200,254,0.28),transparent_50%)]" />
       <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.5] [background-image:radial-gradient(rgba(18,22,58,0.13)_1px,transparent_1px)] [background-size:26px_26px] [mask-image:linear-gradient(to_bottom,black,transparent_75%)]" />
@@ -157,16 +157,16 @@ function Hero({ c }: { c: Conteudo["hero"] }) {
         ))}
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-[1320px] px-5 pt-28 sm:px-10 sm:pt-32 lg:min-h-[min(100svh,900px)] lg:grid-cols-[1fr_1fr] lg:pt-24">
+      <div className="relative mx-auto grid w-full max-w-[1320px] px-5 pt-28 sm:px-10 sm:pt-32 lg:flex-1 lg:grid-cols-[1fr_1fr] lg:pt-24">
         {/* Texto */}
-        <div className="relative z-10 flex flex-col justify-center pb-4 lg:pb-[150px]">
-          <h1 className="pf-titulo pf-entra text-[2.9rem] leading-[0.98] sm:text-[4.2rem] lg:text-[4.4rem] xl:text-[5.1rem]" style={atraso(140)}>
+        <div className="relative z-10 flex flex-col justify-center pb-4 lg:pb-10">
+          <h1 className="pf-titulo pf-entra text-[2.9rem] leading-[0.98] sm:text-[4.2rem] lg:text-[clamp(3rem,min(8.4svh,5.6vw),5.1rem)]" style={atraso(140)}>
             <Rico texto={c.titulo} destaque="pf-tarja pf-tarja-anim [--pf-tarja-de:#12163A]" estiloDestaque={atraso(900)} />
           </h1>
-          <p className="pf-entra mt-7 max-w-[31rem] text-[17px] leading-[1.7] text-[#12163A]/65 sm:text-[18px]" style={atraso(260)}>
+          <p className="pf-entra mt-7 max-w-[31rem] text-[17px] leading-[1.7] text-[#12163A]/65 sm:text-[18px] lg:mt-[clamp(1rem,2.6svh,1.75rem)] lg:max-w-[36rem]" style={atraso(260)}>
             <Rico texto={c.texto} negrito="font-semibold text-[#12163A]" />
           </p>
-          <div className="pf-entra mt-9 flex" style={atraso(380)}>
+          <div className="pf-entra mt-9 flex lg:mt-[clamp(1.25rem,3.4svh,2.25rem)]" style={atraso(380)}>
             <a href="#agendar" className="pf-botao inline-flex items-center rounded-full bg-[#12163A] px-7 py-4 text-[15px] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(18,22,58,0.6)] [--pf-preenche:#63C8FE] hover:text-[#12163A]">
               {c.botao}
             </a>
@@ -175,7 +175,7 @@ function Hero({ c }: { c: Conteudo["hero"] }) {
 
         {/* Foto recortada */}
         <div className="relative h-[480px] sm:h-[600px] lg:h-auto">
-          <div className="pf-entra-foto absolute bottom-0 left-1/2 h-full w-full max-w-[560px] -translate-x-1/2 lg:left-[44%] lg:top-[4%] lg:h-auto">
+          <div className="pf-entra-foto absolute bottom-0 left-1/2 h-full w-full max-w-[560px] -translate-x-1/2 lg:-bottom-[120px] lg:left-[44%] lg:top-[4%] lg:h-auto">
             <Image src={c.foto} alt={`${c.selo_nome}, Performei Consultoria`} fill priority sizes="(min-width: 1024px) 560px, 92vw"
               className="object-contain object-bottom drop-shadow-[0_30px_40px_rgba(18,22,58,0.25)]" />
           </div>
@@ -183,7 +183,7 @@ function Hero({ c }: { c: Conteudo["hero"] }) {
       </div>
 
       {/* Faixa escura: sobe num "morro" em volta do selo e emenda com a seção seguinte */}
-      <div className="relative z-20 -mt-[70px] sm:-mt-[90px] lg:-mt-[150px]">
+      <div className="relative z-20 -mt-[70px] sm:-mt-[90px] lg:mt-0">
         {/* Mesma grade do topo, para o morro e o selo ficarem centrados sob a foto */}
         <div className="pointer-events-none relative z-10 mx-auto grid max-w-[1320px] px-5 sm:px-10 lg:grid-cols-2">
           <div className="hidden lg:block" />
@@ -197,10 +197,10 @@ function Hero({ c }: { c: Conteudo["hero"] }) {
           </div>
         </div>
         <div className="relative rounded-t-[2.5rem] bg-[#12163A] sm:rounded-t-[3rem]">
-          <div className="relative mx-auto max-w-[1320px] px-5 pb-10 pt-[88px] sm:px-10 sm:pb-14 lg:pt-14">
+          <div className="relative mx-auto max-w-[1320px] px-5 pb-10 pt-[88px] sm:px-10 sm:pb-14 lg:pb-8 lg:pt-8">
             <ul className="grid grid-cols-2 gap-x-5 gap-y-8 text-white lg:grid-cols-4 lg:gap-0">
               {c.diferenciais.map((d, i) => (
-                <li key={d._id} className={`pf-entra flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4 lg:px-8 ${i > 0 ? "lg:border-l lg:border-white/10" : "lg:pl-0"}`} style={atraso(1300 + i * 110)}>
+                <li key={d._id} className={`pf-entra flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4 lg:px-6 ${i > 0 ? "lg:border-l lg:border-white/10" : "lg:pl-0"}`} style={atraso(1300 + i * 110)}>
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#63C8FE]/35 bg-[#63C8FE]/[0.08] text-[#63C8FE]">
                     <Icone>{ICONES_DIFERENCIAIS[i % ICONES_DIFERENCIAIS.length]}</Icone>
                   </span>
