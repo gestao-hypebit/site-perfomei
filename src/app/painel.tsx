@@ -48,8 +48,8 @@ export function Painel() {
           </div>
 
           {/* Velocímetro */}
-          <div className="order-1 mx-auto w-full max-w-[250px] sm:max-w-[340px] lg:order-2 lg:max-w-[420px]">
-            <svg viewBox="0 0 220 182" className="w-full" aria-hidden>
+          <div className="order-1 mx-auto w-full max-w-[340px] lg:order-2 lg:max-w-[420px]">
+            <svg viewBox="0 0 220 182" className="mx-auto w-full max-w-[250px] sm:max-w-none" aria-hidden>
               <defs>
                 <linearGradient id="pf-arco" x1="0" x2="1">
                   <stop offset="0" stopColor="#2B86D6" />
@@ -83,9 +83,9 @@ export function Painel() {
               {LEITURAS.map((l, i) => {
                 const aceso = nivel > i;
                 return (
-                  <li key={l} className={`rounded-xl border px-2 py-3 text-center transition-all duration-500 ${aceso ? "border-[#63C8FE]/60 bg-[#63C8FE]/10" : "border-white/10"}`}>
+                  <li key={l} className={`rounded-xl border px-1 py-3 text-center sm:px-2 transition-all duration-500 ${aceso ? "border-[#63C8FE]/60 bg-[#63C8FE]/10" : "border-white/10"}`}>
                     <span className={`mx-auto mb-2 block h-1.5 w-1.5 rounded-full transition-all duration-500 ${aceso ? "bg-[#63C8FE] shadow-[0_0_12px_#63C8FE]" : "bg-white/20"}`} />
-                    <span className={`pf-mono text-[10px] uppercase tracking-[0.12em] transition-colors duration-500 ${aceso ? "text-white" : "text-white/35"}`}>{l}</span>
+                    <span className={`pf-mono text-[10px] uppercase tracking-[0.06em] transition-colors sm:tracking-[0.12em] duration-500 ${aceso ? "text-white" : "text-white/35"}`}>{l}</span>
                   </li>
                 );
               })}
