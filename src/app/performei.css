@@ -12,12 +12,14 @@
 /* ---------- Tipografia ---------- */
 
 .pf-titulo {
-  font-family: var(--font-bricolage), var(--font-texto), system-ui, sans-serif;
+  font-family: var(--font-urbanist), var(--font-texto), system-ui, sans-serif;
   font-weight: 800;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 .pf-titulo em { font-style: normal; }
+/* Com marca-texto, a altura de linha precisa caber a faixa (0,80) + as pernas de g/p/ç da linha de cima (0,25). */
+.pf-titulo:has(.pf-tarja) { line-height: 1.06; }
 
 /* Rótulos pequenos (antes em fonte mono): mesma fonte do texto, mais pesada. */
 .pf-mono { font-family: var(--font-texto), system-ui, sans-serif; font-weight: 600; }

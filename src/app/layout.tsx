@@ -4,16 +4,22 @@ import "./globals.css";
 import "./performei.css";
 
 // Site da Performei Consultoria (cliente da Slick).
-// Bricolage Grotesque (pesada, tamanho óptico) nos títulos, Plus Jakarta Sans no texto
+// Urbanist 800 nos títulos, Plus Jakarta Sans no texto
 // e nos rótulos, Montserrat só no logo (fonte da marca do cliente).
 // Fontes dentro do projeto (fonts/, licença OFL): com next/font/google o build falha
 // quando o Google devolve URL com "&" (/l/font?kit=...&skey=...), o que acontece às vezes.
 
-const bricolage = localFont({
-  src: "./fonts/bricolage-grotesque-latin-opsz-normal.woff2",
-  variable: "--font-bricolage",
-  weight: "200 800",
+const urbanist = localFont({
+  src: "./fonts/urbanist-latin-wght-normal.woff2",
+  variable: "--font-urbanist",
+  weight: "100 900",
   display: "swap",
+  // A área vertical original (0,95 + 0,25) faz o marca-texto cobrir a linha vizinha.
+  declarations: [
+    { prop: "ascent-override", value: "80%" },
+    { prop: "descent-override", value: "25%" },
+    { prop: "line-gap-override", value: "0%" },
+  ],
 });
 
 const texto = localFont({
@@ -55,7 +61,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="pt-BR" className="scroll-smooth" suppressHydrationWarning>
       <body className="bg-[#12163A]">
         <div
-          className={`pf ${texto.variable} ${bricolage.variable} ${montserrat.variable} min-h-screen overflow-x-clip bg-[#12163A] text-white antialiased selection:bg-[#63C8FE] selection:text-[#12163A]`}
+          className={`pf ${texto.variable} ${urbanist.variable} ${montserrat.variable} min-h-screen overflow-x-clip bg-[#12163A] text-white antialiased selection:bg-[#63C8FE] selection:text-[#12163A]`}
         >
           {children}
         </div>
