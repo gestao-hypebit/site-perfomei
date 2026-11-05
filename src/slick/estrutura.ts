@@ -153,13 +153,14 @@ export const ESTRUTURA = {
         campos: {
           nome: { tipo: "texto", rotulo: "Nome", max: 50 },
           empresa: { tipo: "texto", rotulo: "Empresa / cargo", max: 70 },
+          logo: { tipo: "imagem", rotulo: "Logo da empresa", ajuda: "Imagem quadrada; aparece pequena, dentro de um círculo. Sem logo, mostra as iniciais do nome." },
           destaque: { tipo: "texto", rotulo: "Frase em destaque", max: 90 },
           texto: { tipo: "textarea", rotulo: "Depoimento", max: 600 },
         },
         padrao: [
-          { nome: "Renata Almeida", empresa: "Canto das Flores · Psicologia e Arte", destaque: "Um lugar que já era bom se tornou melhor ainda.", texto: "Rubens me trouxe uma perspectiva valiosa, identificando pontos de melhoria que muitas vezes passavam desapercebidos por mim. Suas recomendações práticas e estratégicas me permitiram ter mais saúde e tranquilidade em meu consultório. Também tenho obtido retornos tanto financeiro como de expansão de parcerias a partir dos planejamentos feitos pela consultoria. Recomendo fortemente a Performei!" },
-          { nome: "Heitor Pereira", empresa: "CEO · Heitor Pereira Curso de Idiomas", destaque: "Nos ajudou a chegar onde estamos hoje.", texto: "Os serviços da Performei sempre foram super úteis e nos ajudou a chegar onde estamos hoje. Sempre fomos bem atendidos com orientações técnicas de finanças e marketing que nos ajudaram a crescer. Muito obrigado, Rubens." },
-          { nome: "Vera Oyola", empresa: "Sol e Mar Piscinas e Saunas", destaque: "Muito importante para a organização da empresa.", texto: "A Performei vem sendo muito importante para a organização da empresa no âmbito financeiro e organizacional. Com as suas técnicas vem interagindo com a equipe de forma excelente, buscando o engajamento em todas as etapas do processo." },
+          { nome: "Renata Almeida", empresa: "Canto das Flores · Psicologia e Arte", logo: "/logos/canto-das-flores.webp", destaque: "Um lugar que já era bom se tornou melhor ainda.", texto: "Rubens me trouxe uma perspectiva valiosa, identificando pontos de melhoria que muitas vezes passavam desapercebidos por mim. Suas recomendações práticas e estratégicas me permitiram ter mais saúde e tranquilidade em meu consultório. Também tenho obtido retornos tanto financeiro como de expansão de parcerias a partir dos planejamentos feitos pela consultoria. Recomendo fortemente a Performei!" },
+          { nome: "Heitor Pereira", empresa: "CEO · Heitor Pereira Curso de Idiomas", logo: "/logos/heitor-pereira.webp", destaque: "Nos ajudaram a chegar onde estamos hoje.", texto: "Os serviços da Performei sempre foram super úteis e nos ajudou a chegar onde estamos hoje. Sempre fomos bem atendidos com orientações técnicas de finanças e marketing que nos ajudaram a crescer. Muito obrigado, Rubens." },
+          { nome: "Vera Oyola", empresa: "Sol e Mar Piscinas e Saunas", logo: "/logos/sol-e-mar.webp", destaque: "Muito importante para a organização da empresa.", texto: "A Performei vem sendo muito importante para a organização da empresa no âmbito financeiro e organizacional. Com as suas técnicas vem interagindo com a equipe de forma excelente, buscando o engajamento em todas as etapas do processo." },
         ],
       },
     },
@@ -169,7 +170,7 @@ export const ESTRUTURA = {
     campos: {
       titulo: { tipo: "texto", rotulo: "Título", max: 60, ajuda: DESTAQUE, padrao: "Ficou alguma *dúvida*?" },
       foto: { tipo: "imagem", rotulo: "Foto pequena", ajuda: "Aparece pequena e quadrada.", padrao: "/fotos/rubens-sala-reuniao.jpg" },
-      texto: { tipo: "textarea", rotulo: "Texto ao lado da foto", max: 160, ajuda: "Use **dois asteriscos** para negrito.", padrao: "Se a sua não estiver aqui, me chama no WhatsApp. **Respondo pessoalmente.**" },
+      texto: { tipo: "textarea", rotulo: "Texto ao lado da foto", max: 160, ajuda: "Use **dois asteriscos** para negrito.", padrao: "Se a sua dúvida não estiver aqui, me chama no WhatsApp. **Respondo pessoalmente.**" },
       itens: {
         tipo: "lista", rotulo: "Perguntas", itemRotulo: "Pergunta", min: 1, maxItens: 15,
         campos: {
@@ -177,10 +178,10 @@ export const ESTRUTURA = {
           resposta: { tipo: "textarea", rotulo: "Resposta", max: 900 },
         },
         padrao: [
-          { pergunta: "Minha empresa é pequena demais para ter consultoria?", resposta: "Muito pelo contrário. É justamente quando a empresa é menor que dá para construir bases sólidas, organizar os números e definir a estratégia certa desde o início. Assim o crescimento vem planejado, sem incêndio para apagar depois. Pequeno é o tamanho perfeito para crescer certo." },
+          { pergunta: "Minha empresa é pequena demais para ter consultoria?", resposta: "Muito pelo contrário. É justamente quando a empresa é pequena que dá para construir bases sólidas, organizar os números e definir a estratégia certa desde o início. Assim o crescimento vem planejado, sem incêndio para apagar depois. Pequeno é o tamanho perfeito para crescer certo." },
           { pergunta: "Já tenho contador. Vocês fazem a mesma coisa?", resposta: "Não. Seu contador é essencial para a saúde fiscal e legal da empresa. A Performei entra para te ajudar a entender o que esses números significam, transformar dados em decisões e criar um plano claro para os seus objetivos. O contador garante que a empresa esteja em dia; a gente pensa junto com você para ela ir além. É trabalho em equipe." },
           { pergunta: "Meus números são um mistério para mim. E agora?", resposta: "É o cenário mais comum, e é exatamente aí que eu entro. Não tenho bola de cristal, mas tenho método: descomplico seus dados, transformo planilha em decisão e mostro onde o lucro está escondido. Chega de adivinhar." },
-          { pergunta: "Consultoria não é só para empresa grande e com orçamento?", resposta: "A Performei é feita sob medida para a realidade do pequeno empresário. Acesso a organização e estratégia não deveria ser privilégio de gigante. Depois da primeira conversa você recebe uma proposta clara, com escopo e investimento definidos, sem surpresa." },
+          { pergunta: "Consultoria não é só para empresa grande e com orçamento?", resposta: "A Performei é feita sob medida para a realidade do pequeno empresário. Acesso à organização e estratégia não deveriam ser privilégios de gigante. Depois da primeira conversa você recebe uma proposta clara, com escopo e investimento definidos, sem surpresa." },
           { pergunta: "Já estou afogado em tarefas. A consultoria vai me dar mais trabalho?", resposta: "A ideia é justamente o oposto. No começo há um pequeno esforço conjunto para alinhar tudo, mas o objetivo é organizar a empresa, otimizar processos e liberar o seu tempo e a sua cabeça para o que realmente importa." },
           { pergunta: "O que eu ganho, afinal? Mais números para analisar?", resposta: "Você ganha clareza, direção, um plano de ação e a segurança de estar tomando as melhores decisões. O objetivo não é só entender os números: é usar os números para crescer e ter um negócio mais lucrativo e sustentável." },
           { pergunta: "Depois que a consultoria termina, fico sozinho de novo?", resposta: "De jeito nenhum. A missão é deixar você e sua equipe com autonomia para saber o que fazer. E, se fizer sentido para o seu negócio, a Performei também pode assumir processos que tomam o seu tempo. Eu te ensino a pescar, e também posso pescar por você." },
@@ -245,12 +246,17 @@ export function mesclarConteudo(publicado: unknown): Conteudo {
       const v = vs[cid];
       if (campo.tipo === "lista") {
         if (!Array.isArray(v)) continue;
+        const padroes = base[sid][cid] as Record<string, string>[];
         const itens = v
           .filter((x): x is Record<string, unknown> => !!x && typeof x === "object")
           .slice(0, campo.maxItens ?? 50)
           .map((x, i) => {
             const item: Record<string, string> = { _id: typeof x._id === "string" ? x._id : `i${i}` };
-            for (const sub of Object.keys(campo.campos)) item[sub] = typeof x[sub] === "string" ? (x[sub] as string) : "";
+            for (const [sub, def] of entradas(campo.campos)) {
+              item[sub] = typeof x[sub] === "string" ? (x[sub] as string) : "";
+              // Imagem vazia em item que veio do padrão (ex.: publicado antes de o campo existir) volta para o padrão.
+              if (def.tipo === "imagem" && !item[sub].trim()) item[sub] = padroes.find((p) => p._id === item._id)?.[sub] ?? "";
+            }
             return item;
           });
         if (itens.length >= (campo.min ?? 0)) base[sid][cid] = itens;

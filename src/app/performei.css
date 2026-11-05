@@ -146,12 +146,13 @@ html[data-pf-visto] .pf-preloader { display: none; }
 /* ---------- Antes × depois: o improviso é riscado ao entrar na tela ---------- */
 
 .pf-risco {
-  background: linear-gradient(#1a7bb8, #1a7bb8) no-repeat 0 58% / 100% 2px;
+  /* Risco fino e translúcido: marca o "antes" sem atrapalhar a leitura. */
+  background: linear-gradient(rgba(26, 123, 184, 0.7), rgba(26, 123, 184, 0.7)) no-repeat 0 58% / 100% 1.5px;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
-.pf-anim .pf-risco { background-size: 0% 2px; transition: background-size 0.9s var(--pf-curva-io) 0.45s; }
-.pf-anim .pf-visivel .pf-risco { background-size: 100% 2px; }
+.pf-anim .pf-risco { background-size: 0% 1.5px; transition: background-size 0.9s var(--pf-curva-io) 0.45s; }
+.pf-anim .pf-visivel .pf-risco { background-size: 100% 1.5px; }
 .pf-anim .pf-depois { opacity: 0; transform: translateX(-16px); transition: opacity 0.8s var(--pf-curva) 0.9s, transform 0.8s var(--pf-curva) 0.9s; }
 .pf-anim .pf-visivel .pf-depois { opacity: 1; transform: none; }
 

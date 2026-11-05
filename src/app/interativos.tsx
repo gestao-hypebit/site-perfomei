@@ -1,8 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
+/* ---------- Pilha de cartões: informa a altura de cada um para o CSS ---------- */
+
+// Cada <li> usa --pf-altura no `top` do sticky: cartão mais alto que a tela só gruda
+// depois de mostrar o fim, assim o próximo nunca cobre o botão antes da hora.
+export function PilhaCartoes({ children }: { children: ReactNode }) {
+  const lista = useRef<HTMLOListElement>(null);
+
+  useEffect(() => {
+    const ol = lista.current;
+    if (!ol) return;
+    const medir = new ResizeObserver((itens) => {
+      for (const { target } of itens) {
+        const li = target as HTMLElement;
+        li.style.setProperty("--pf-altura", `${li.offsetHeight}px`);
+      }
+    });
+    Array.from(ol.children).forEach((li) => medir.observe(li));
+    return () => medir.disconnect();
+  }, []);
+
+  return <ol ref={lista}>{children}</ol>;
+}
 
 /* ---------- Checklist clicável: pra quem é ---------- */
 

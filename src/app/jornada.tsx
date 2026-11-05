@@ -10,7 +10,7 @@ import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform 
 const ETAPAS = [
   { titulo: "Primeira conversa", texto: "30 minutos, sem compromisso. Você conta como está a empresa e onde está o aperto; eu explico, sem enrolação, como posso ajudar.", entrega: "Clareza do caminho" },
   { titulo: "Diagnóstico", texto: "Olho números, preços e rotina de perto e mostro onde a empresa perde dinheiro e tempo.", entrega: "Raio-x com prioridades" },
-  { titulo: "Plano de ação", texto: "Prioridades, metas e tarefas claras. Cada passo com motivo, prazo e responsável.", entrega: "Plano com metas e prazos" },
+  { titulo: "Plano de ação", texto: "Prioridades, metas e tarefas claras. Cada passo com motivo, prazo e um responsável por isso.", entrega: "Plano com metas e prazos" },
   { titulo: "Acompanhamento", texto: "Encontros periódicos para medir, ajustar a rota e decidir com base no que os números mostram.", entrega: "Decisões guiadas por números" },
 ];
 

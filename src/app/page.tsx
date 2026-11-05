@@ -5,7 +5,7 @@ import { linkWhats } from "./whats";
 import { FormAgendar } from "./agendar";
 import { Preloader, ProgressoRolagem, SCRIPT_PRELOADER } from "./preloader";
 import { Painel } from "./painel";
-import { Checklist } from "./interativos";
+import { Checklist, PilhaCartoes } from "./interativos";
 import { Jornada } from "./jornada";
 import { getConteudo } from "@/slick/conteudo";
 import type { Conteudo } from "@/slick/estrutura";
@@ -160,7 +160,7 @@ function Hero({ c }: { c: Conteudo["hero"] }) {
       <div className="relative mx-auto grid w-full max-w-[1320px] px-5 pt-28 sm:px-10 sm:pt-32 lg:flex-1 lg:grid-cols-[1fr_1fr] lg:pt-24">
         {/* Texto */}
         <div className="relative z-10 flex flex-col justify-center pb-4 lg:pb-10">
-          <h1 className="pf-titulo pf-entra text-[2.9rem] leading-[0.98] sm:text-[4.2rem] lg:text-[clamp(3rem,min(8.4svh,5.6vw),5.1rem)]" style={atraso(140)}>
+          <h1 className="pf-titulo pf-entra text-[2.5rem] leading-[1] sm:text-[4.2rem] lg:text-[clamp(3rem,min(8.4svh,5.6vw),5.1rem)]" style={atraso(140)}>
             <Rico texto={c.titulo} destaque="pf-tarja pf-tarja-anim [--pf-tarja-de:#12163A]" estiloDestaque={atraso(900)} />
           </h1>
           <p className="pf-entra mt-7 max-w-[31rem] text-[17px] leading-[1.7] text-[#12163A]/65 sm:text-[18px] lg:mt-[clamp(1rem,2.6svh,1.75rem)] lg:max-w-[36rem]" style={atraso(260)}>
@@ -236,7 +236,7 @@ function Diferenca({ c }: { c: Conteudo["diferenca"] }) {
         {/* Cabeçalho das colunas (só desktop) */}
         <div aria-hidden className="mt-16 hidden grid-cols-[9rem_1fr_4rem_1fr] gap-8 border-b border-[#12163A]/15 pb-5 lg:grid">
           <span />
-          <span className="pf-mono text-[12px] font-semibold uppercase tracking-[0.16em] text-[#12163A]/40">{c.rotulo_antes}</span>
+          <span className="pf-mono text-[12px] font-semibold uppercase tracking-[0.16em] text-[#12163A]/70">{c.rotulo_antes}</span>
           <span />
           <span className="pf-mono text-[12px] font-semibold uppercase tracking-[0.16em] text-[#1A7BB8]">{c.rotulo_depois}</span>
         </div>
@@ -245,13 +245,13 @@ function Diferenca({ c }: { c: Conteudo["diferenca"] }) {
           {c.itens.map((l, i) => (
             <li key={l._id} data-revelar style={atraso(i * 90)}
               className="grid gap-4 border-b border-[#12163A]/10 py-9 lg:grid-cols-[9rem_1fr_4rem_1fr] lg:items-center lg:gap-8 lg:py-11">
-              <span className="pf-titulo text-[1.5rem] tracking-[-0.03em] text-[#12163A]/30 lg:text-[1.9rem]">{l.tema}</span>
+              <span className="pf-titulo text-[1.85rem] leading-[1.1] tracking-[-0.03em] text-[#12163A] lg:text-[1.9rem]">{l.tema}</span>
               {/* "Antes"/"Depois" por linha só abaixo do desktop, onde não há o cabeçalho das colunas */}
               <div>
-                <span className="pf-mono mb-2 inline-block rounded-full bg-[#12163A]/[0.06] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#12163A]/50 lg:hidden">
+                <span className="pf-mono mb-2 inline-block rounded-full bg-[#12163A]/[0.06] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#12163A]/70 lg:hidden">
                   Antes
                 </span>
-                <p className="text-[17px] leading-[1.6] text-[#12163A]/45 sm:text-[18px]">
+                <p className="text-[18px] leading-[1.6] text-[#12163A]/75">
                   <span className="pf-risco">{l.antes}</span>
                 </p>
               </div>
@@ -345,11 +345,12 @@ function Servicos({ c }: { c: Conteudo["servicos"] }) {
           </p>
         </div>
 
-        <ol>
+        <PilhaCartoes>
           {c.itens.map((item, i) => {
             const s = { ...item, ...VISUAL_SERVICOS[i % VISUAL_SERVICOS.length] };
             return (
-            <li key={item._id} className="sticky mb-6 last:mb-0" style={{ top: `calc(100px + ${i * 26}px)` }}>
+            // O menor dos dois: a posição da pilha ou, se o cartão não couber na tela, onde o fim dele aparece.
+            <li key={item._id} className="sticky mb-6 last:mb-0" style={{ top: `min(${100 + i * 26}px, calc(100svh - var(--pf-altura, 0px) - 16px))` }}>
               <article data-revelar className={`pf-cartao grid overflow-hidden rounded-[2.2rem] shadow-[0_-20px_60px_-30px_rgba(0,0,0,0.6)] lg:min-h-[540px] lg:grid-cols-[1.15fr_0.85fr] ${s.tema}`}>
                 <div className="flex flex-col p-7 sm:p-12 lg:p-14">
                   <div className="flex items-baseline justify-between gap-4">
@@ -376,7 +377,7 @@ function Servicos({ c }: { c: Conteudo["servicos"] }) {
             </li>
             );
           })}
-        </ol>
+        </PilhaCartoes>
       </div>
     </section>
   );
@@ -461,6 +462,16 @@ function Sobre({ c, contatos }: { c: Conteudo["sobre"]; contatos: Contatos }) {
 
 const iniciais = (n: string) => n.split(" ").map((p) => p[0]).slice(0, 2).join("");
 
+// Logo da empresa no círculo; sem logo, as iniciais no estilo de cada cartão.
+function SeloDepoimento({ nome, logo, estiloIniciais }: { nome: string; logo: string; estiloIniciais: string }) {
+  if (!logo) return <span className={`pf-titulo flex shrink-0 items-center justify-center rounded-full tracking-normal ${estiloIniciais}`}>{iniciais(nome)}</span>;
+  return (
+    <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-white">
+      <Image src={logo} alt="" fill sizes="112px" className="object-contain" />
+    </span>
+  );
+}
+
 function Depoimentos({ c }: { c: Conteudo["depoimentos"] }) {
   const [principal, ...outros] = c.itens;
   return (
@@ -478,7 +489,7 @@ function Depoimentos({ c }: { c: Conteudo["depoimentos"] }) {
               <p className="mt-7 max-w-[38rem] text-[16.5px] leading-[1.75] text-[#12163A]/75">{principal.texto}</p>
             </blockquote>
             <figcaption className="relative mt-10 flex items-center gap-4 border-t border-[#12163A]/15 pt-6">
-              <span className="pf-titulo flex h-12 w-12 items-center justify-center rounded-full bg-[#12163A] text-[15px] tracking-normal text-[#63C8FE]">{iniciais(principal.nome)}</span>
+              <SeloDepoimento nome={principal.nome} logo={principal.logo} estiloIniciais="h-12 w-12 bg-[#12163A] text-[15px] text-[#63C8FE]" />
               <span>
                 <span className="block font-semibold">{principal.nome}</span>
                 <span className="text-[13.5px] text-[#12163A]/65">{principal.empresa}</span>
@@ -494,7 +505,7 @@ function Depoimentos({ c }: { c: Conteudo["depoimentos"] }) {
                   <p className="mt-4 text-[15.5px] leading-[1.7] text-white/60">{d.texto}</p>
                 </blockquote>
                 <figcaption className="mt-7 flex items-center gap-4">
-                  <span className="pf-titulo flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-[14px] tracking-normal text-[#63C8FE]">{iniciais(d.nome)}</span>
+                  <SeloDepoimento nome={d.nome} logo={d.logo} estiloIniciais="h-11 w-11 bg-white/10 text-[14px] text-[#63C8FE]" />
                   <span>
                     <span className="block font-semibold">{d.nome}</span>
                     <span className="text-[13px] text-white/50">{d.empresa}</span>
@@ -605,8 +616,8 @@ function Rodape({ contatos }: { contatos: Contatos }) {
 function WhatsFlutuante({ contatos }: { contatos: Contatos }) {
   return (
     <a href={contatos.whatsOi} target="_blank" rel="noopener" aria-label="Conversar no WhatsApp"
-      className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#63C8FE] text-[#12163A] shadow-[0_12px_30px_-8px_rgba(0,0,0,0.6)] transition-transform hover:scale-110 sm:bottom-8 sm:right-8">
-      <IconeWhats className="h-7 w-7" />
+      className="fixed bottom-5 right-5 z-50 h-14 w-14 overflow-hidden rounded-full border-2 border-[#63C8FE] bg-[#12163A] shadow-[0_12px_30px_-8px_rgba(0,0,0,0.6)] transition-transform hover:scale-110 sm:bottom-8 sm:right-8">
+      <Image src="/fotos/rubens-retrato.jpg" alt="" fill sizes="112px" className="origin-[27%_13%] scale-[1.35] object-cover object-top" />
     </a>
   );
 }
