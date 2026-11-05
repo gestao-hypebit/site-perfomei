@@ -616,8 +616,19 @@ function Rodape({ contatos }: { contatos: Contatos }) {
 function WhatsFlutuante({ contatos }: { contatos: Contatos }) {
   return (
     <a href={contatos.whatsOi} target="_blank" rel="noopener" aria-label="Conversar no WhatsApp"
-      className="fixed bottom-5 right-5 z-50 h-14 w-14 overflow-hidden rounded-full border-2 border-[#63C8FE] bg-[#12163A] shadow-[0_12px_30px_-8px_rgba(0,0,0,0.6)] transition-transform hover:scale-110 sm:bottom-8 sm:right-8">
-      <Image src="/fotos/rubens-retrato.jpg" alt="" fill sizes="112px" className="origin-[27%_13%] scale-[1.35] object-cover object-top" />
+      className="group fixed bottom-5 right-5 z-50 sm:bottom-8 sm:right-8">
+      {/* O balão aparece e recolhe (performei.css); o selo do WhatsApp fica sempre. */}
+      <span className="pf-contato-rotulo absolute inset-y-0 right-full mr-2.5 my-auto h-fit whitespace-nowrap rounded-full bg-[#63C8FE] px-3.5 py-2 text-[13.5px] font-semibold text-[#12163A] shadow-[0_10px_24px_-8px_rgba(0,0,0,0.55)]">
+        Fale comigo
+      </span>
+      <span className="relative block h-14 w-14 transition-transform group-hover:scale-110">
+        <span className="absolute inset-0 overflow-hidden rounded-full border-2 border-[#63C8FE] bg-[#12163A] shadow-[0_12px_30px_-8px_rgba(0,0,0,0.6)]">
+          <Image src="/fotos/rubens-retrato.jpg" alt="" fill sizes="112px" className="origin-[27%_13%] scale-[1.35] object-cover object-top" />
+        </span>
+        <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-[#25D366] text-white ring-2 ring-white">
+          <IconeWhats className="h-4 w-4" />
+        </span>
+      </span>
     </a>
   );
 }

@@ -59,7 +59,19 @@
 /* Enquanto o preloader está na tela, as entradas do topo esperam. */
 html[data-pf-carregando] .pf-entra,
 html[data-pf-carregando] .pf-entra-foto,
-html[data-pf-carregando] .pf-tarja-anim { animation-play-state: paused; }
+html[data-pf-carregando] .pf-tarja-anim,
+html[data-pf-carregando] .pf-contato-rotulo { animation-play-state: paused; }
+
+/* Balão "Fale comigo" do botão flutuante: aparece e recolhe para não ficar sobre o texto; volta no hover. */
+@keyframes pf-contato-rotulo {
+  0% { opacity: 0; transform: translateX(10px); visibility: visible; }
+  7%, 92% { opacity: 1; transform: none; visibility: visible; }
+  100% { opacity: 0; transform: translateX(10px); visibility: hidden; }
+}
+.pf-contato-rotulo { animation: pf-contato-rotulo 7s var(--pf-curva) 1s both; }
+@media (prefers-reduced-motion: reduce) { .pf-contato-rotulo { animation: none; opacity: 0; visibility: hidden; } }
+/* !important vence a animação sem reiniciá-la: ao tirar o mouse, o balão não volta sozinho. */
+@media (hover: hover) { .group:hover .pf-contato-rotulo { opacity: 1 !important; visibility: visible !important; transform: none !important; } }
 
 .pf-anim [data-revelar] {
   opacity: 0;
