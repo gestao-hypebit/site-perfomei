@@ -7,9 +7,9 @@ import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform,
 // e o "painel do carro" sai do apagado para o aceso (a metáfora central da marca).
 
 const FRASE =
-  "Faturar não é lucrar. Estar ocupado não é crescer. Decidir no feeling não é estratégia. Com os números na mão, você para de apagar incêndio e passa a";
+  "Faturar não é lucrar. Estar ocupado não é crescer. Decidir no feeling não é estratégia. Com os números na mão, você deixa de gerenciar no escuro e passa a";
 const PALAVRAS = FRASE.split(" ");
-const FINAL = "dirigir a empresa.";
+const FINAL = "entrar no controle.";
 
 const LEITURAS = ["Caixa", "Margem", "Rotina", "Rumo"];
 
