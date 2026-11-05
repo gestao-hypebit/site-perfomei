@@ -37,9 +37,10 @@ export function Painel() {
       <div className="sticky top-0 flex h-[100svh] items-center overflow-hidden">
         <motion.div aria-hidden style={{ opacity: brilho }} className="pointer-events-none absolute right-[-10%] top-1/2 h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-[#63C8FE]/30 blur-[160px]" />
 
-        <div className="relative mx-auto grid w-full max-w-[1320px] items-center gap-10 px-5 sm:px-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
+        <div className="relative mx-auto grid w-full max-w-[1320px] items-center gap-6 px-5 sm:gap-10 sm:px-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
           <div className="order-2 lg:order-1">
-            <p className="pf-titulo text-[1.95rem] leading-[1.08] sm:text-[3rem] lg:text-[3.6rem]">
+            {/* No desktop o tamanho acompanha também a altura da tela: a frase precisa caber abaixo do menu. */}
+            <p className="pf-titulo text-[1.7rem] sm:text-[2.5rem] lg:text-[clamp(2.25rem,min(7.2svh,3.4vw),3rem)]">
               {PALAVRAS.map((w, i) => (
                 <Palavra key={i} texto={w} i={i} total={PALAVRAS.length} p={p} />
               ))}
@@ -49,7 +50,7 @@ export function Painel() {
 
           {/* Velocímetro */}
           <div className="order-1 mx-auto w-full max-w-[340px] lg:order-2 lg:max-w-[420px]">
-            <svg viewBox="0 0 220 182" className="mx-auto w-full max-w-[250px] sm:max-w-none" aria-hidden>
+            <svg viewBox="0 0 220 182" className="mx-auto w-full max-w-[min(250px,28svh)] sm:max-w-none" aria-hidden>
               <defs>
                 <linearGradient id="pf-arco" x1="0" x2="1">
                   <stop offset="0" stopColor="#2B86D6" />
