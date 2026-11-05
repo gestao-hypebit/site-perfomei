@@ -220,6 +220,16 @@ function Hero({ c }: { c: Conteudo["hero"] }) {
 
 /* ---------- Diferença: antes × depois, tudo visível (sem clique) ---------- */
 
+// ✕ e ✓ da comparação: desenho próprio porque emoji muda de aparência em cada aparelho.
+function IconeComparacao({ tipo, className = "h-5 w-5" }: { tipo: "nao" | "sim"; className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden className={`shrink-0 ${className}`}>
+      <circle cx="10" cy="10" r="10" fill={tipo === "nao" ? "#D9363E" : "#16A34A"} />
+      <path d={tipo === "nao" ? "m6.5 6.5 7 7m0-7-7 7" : "m5.5 10.5 3 3 6-6.5"} fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 function Diferenca({ c }: { c: Conteudo["diferenca"] }) {
   return (
     <section className="bg-[#F4F9FD] px-5 py-24 text-[#12163A] sm:px-10 sm:py-36">
@@ -236,9 +246,9 @@ function Diferenca({ c }: { c: Conteudo["diferenca"] }) {
         {/* Cabeçalho das colunas (só desktop) */}
         <div aria-hidden className="mt-16 hidden grid-cols-[9rem_1fr_4rem_1fr] gap-8 border-b border-[#12163A]/15 pb-5 lg:grid">
           <span />
-          <span className="pf-mono text-[12px] font-semibold uppercase tracking-[0.16em] text-[#12163A]/70">{c.rotulo_antes}</span>
+          <span className="pf-mono flex items-center gap-2.5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#12163A]/70"><IconeComparacao tipo="nao" />{c.rotulo_antes}</span>
           <span />
-          <span className="pf-mono text-[12px] font-semibold uppercase tracking-[0.16em] text-[#1A7BB8]">{c.rotulo_depois}</span>
+          <span className="pf-mono flex items-center gap-2.5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#1A7BB8]"><IconeComparacao tipo="sim" />{c.rotulo_depois}</span>
         </div>
 
         <ol className="mt-10 lg:mt-0">
@@ -248,7 +258,8 @@ function Diferenca({ c }: { c: Conteudo["diferenca"] }) {
               <span className="pf-titulo text-[1.85rem] leading-[1.1] tracking-[-0.03em] text-[#12163A] lg:text-[1.9rem]">{l.tema}</span>
               {/* "Antes"/"Depois" por linha só abaixo do desktop, onde não há o cabeçalho das colunas */}
               <div>
-                <span className="pf-mono mb-2 inline-block rounded-full bg-[#12163A]/[0.06] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#12163A]/70 lg:hidden">
+                <span className="pf-mono mb-2 inline-flex items-center gap-1.5 rounded-full bg-[#12163A]/[0.06] py-1 pl-1.5 pr-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#12163A]/70 lg:hidden">
+                  <IconeComparacao tipo="nao" className="h-4 w-4" />
                   Antes
                 </span>
                 <p className="text-[18px] leading-[1.6] text-[#12163A]/75">
@@ -259,7 +270,8 @@ function Diferenca({ c }: { c: Conteudo["diferenca"] }) {
                 <Seta className="h-5 w-5" />
               </span>
               <div className="pf-depois">
-                <span className="pf-mono mb-2 inline-block rounded-full bg-[#63C8FE] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#12163A] lg:hidden">
+                <span className="pf-mono mb-2 inline-flex items-center gap-1.5 rounded-full bg-[#63C8FE] py-1 pl-1.5 pr-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#12163A] lg:hidden">
+                  <IconeComparacao tipo="sim" className="h-4 w-4" />
                   Depois
                 </span>
                 <p className="pf-titulo text-[1.4rem] leading-[1.25] tracking-[-0.03em] sm:text-[1.65rem]">
