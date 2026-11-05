@@ -1,30 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Montserrat, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import "./performei.css";
 
 // Site da Performei Consultoria (cliente da Slick).
 // Bricolage Grotesque (pesada, tamanho óptico) nos títulos, Plus Jakarta Sans no texto
 // e nos rótulos, Montserrat só no logo (fonte da marca do cliente).
+// Fontes dentro do projeto (fonts/, licença OFL): com next/font/google o build falha
+// quando o Google devolve URL com "&" (/l/font?kit=...&skey=...), o que acontece às vezes.
 
-const bricolage = Bricolage_Grotesque({
+const bricolage = localFont({
+  src: "./fonts/bricolage-grotesque-latin-opsz-normal.woff2",
   variable: "--font-bricolage",
-  subsets: ["latin"],
-  axes: ["opsz"],
+  weight: "200 800",
   display: "swap",
 });
 
-const texto = Plus_Jakarta_Sans({
+const texto = localFont({
+  src: "./fonts/plus-jakarta-sans-latin-wght-normal.woff2",
   variable: "--font-texto",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "200 800",
   display: "swap",
 });
 
-const montserrat = Montserrat({
+const montserrat = localFont({
+  src: "./fonts/montserrat-latin-wght-normal.woff2",
   variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: "100 900",
   display: "swap",
 });
 
