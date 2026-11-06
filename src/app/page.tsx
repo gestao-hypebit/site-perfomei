@@ -7,6 +7,7 @@ import { Preloader, ProgressoRolagem, SCRIPT_PRELOADER } from "./preloader";
 import { Painel } from "./painel";
 import { Checklist, PilhaCartoes } from "./interativos";
 import { Jornada } from "./jornada";
+import { Etiqueta } from "./etiqueta";
 import { getConteudo } from "@/slick/conteudo";
 import type { Conteudo } from "@/slick/estrutura";
 import { Rico, emailValido, linhas, numeroWhats, paragrafos } from "@/slick/rico";
@@ -234,6 +235,7 @@ function Diferenca({ c }: { c: Conteudo["diferenca"] }) {
   return (
     <section className="bg-[#F4F9FD] px-5 py-24 text-[#12163A] sm:px-10 sm:py-36">
       <div className="mx-auto max-w-[1320px]">
+        <Etiqueta texto={c.etiqueta} tema="claro" />
         <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-end">
           <h2 data-revelar className="pf-titulo text-[2.5rem] leading-[1] sm:text-[3.6rem] lg:text-[4.3rem]">
             <Rico texto={c.titulo} apagado="text-[#12163A]/35" />
@@ -348,6 +350,7 @@ function Servicos({ c }: { c: Conteudo["servicos"] }) {
   return (
     <section id="servicos" className="scroll-mt-24 px-5 py-24 sm:px-10 sm:py-36">
       <div className="mx-auto max-w-[1320px]">
+        <Etiqueta texto={c.etiqueta} tema="escuro" />
         <div className="mb-14 grid gap-8 lg:mb-20 lg:grid-cols-[1.4fr_1fr] lg:items-end">
           <h2 data-revelar className="pf-titulo text-[2.5rem] leading-[1] sm:text-[3.6rem] lg:text-[4.3rem]">
             <Rico texto={c.titulo} />
@@ -418,19 +421,7 @@ function Fatos({ c }: { c: Conteudo["fatos"] }) {
 function ParaQuem({ c }: { c: Conteudo["para_quem"] }) {
   return (
     <section className="bg-white px-5 py-24 text-[#12163A] sm:px-10 sm:py-36">
-      <div className="mx-auto grid max-w-[1320px] gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-24">
-        <div className="lg:sticky lg:top-32 lg:self-start">
-          <h2 data-revelar style={atraso(100)} className="pf-titulo text-[2.5rem] leading-[1] sm:text-[3.6rem]">
-            <Rico texto={c.titulo} />
-          </h2>
-          <p data-revelar style={atraso(200)} className="mt-8 max-w-md text-[17px] leading-[1.7] text-[#12163A]/65">
-            {c.texto}
-          </p>
-        </div>
-        <div data-revelar style={atraso(150)}>
-          <Checklist />
-        </div>
-      </div>
+      <Checklist etiqueta={<Etiqueta texto={c.etiqueta} tema="claro" />} titulo={<Rico texto={c.titulo} />} texto={c.texto} />
     </section>
   );
 }
@@ -453,6 +444,7 @@ function Sobre({ c, contatos }: { c: Conteudo["sobre"]; contatos: Contatos }) {
         </div>
 
         <div className="flex flex-col justify-center">
+          <Etiqueta texto={c.etiqueta} tema="claro" />
           <h2 data-revelar style={atraso(100)} className="pf-titulo text-[2.5rem] leading-[1] sm:text-[3.5rem]">
             <Rico texto={c.titulo} />
           </h2>
@@ -489,6 +481,7 @@ function Depoimentos({ c }: { c: Conteudo["depoimentos"] }) {
   return (
     <section id="depoimentos" className="scroll-mt-24 px-5 py-24 sm:px-10 sm:py-36">
       <div className="mx-auto max-w-[1320px]">
+        <Etiqueta texto={c.etiqueta} tema="escuro" />
         <h2 data-revelar className="pf-titulo max-w-[13em] text-[2.5rem] leading-[1] sm:text-[3.6rem]">
           <Rico texto={c.titulo} />
         </h2>
@@ -539,6 +532,7 @@ function Duvidas({ c, contatos }: { c: Conteudo["duvidas"]; contatos: Contatos }
     <section id="duvidas" className="scroll-mt-24 bg-white px-5 py-24 text-[#12163A] sm:px-10 sm:py-36">
       <div className="mx-auto grid max-w-[1320px] gap-14 lg:grid-cols-[1fr_1.5fr] lg:gap-24">
         <div className="lg:sticky lg:top-32 lg:self-start">
+          <Etiqueta texto={c.etiqueta} tema="claro" />
           <h2 data-revelar className="pf-titulo text-[2.5rem] leading-[1] sm:text-[3.6rem]">
             <Rico texto={c.titulo} />
           </h2>
@@ -581,6 +575,7 @@ function Agendar({ c, ct, contatos }: { c: Conteudo["agendar"]; ct: Conteudo["co
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-40 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-[#63C8FE]/15 blur-[160px]" />
       <div className="relative mx-auto max-w-[760px]">
         <div className="text-center">
+          <Etiqueta texto={c.etiqueta} tema="escuro" />
           <h2 data-revelar className="pf-titulo mx-auto max-w-[11em] text-[3rem] leading-[0.95] sm:text-[4.6rem] lg:text-[5.4rem]">
             <Rico texto={c.titulo} />
           </h2>

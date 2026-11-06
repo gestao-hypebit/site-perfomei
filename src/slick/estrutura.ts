@@ -32,6 +32,14 @@ type Secao = { titulo: string; descricao?: string; campos: Record<string, CampoS
 
 const DESTAQUE = "Use *asteriscos* no trecho com marca-texto azul.";
 
+const etiqueta = (padrao: string) => ({
+  tipo: "texto" as const,
+  rotulo: "Etiqueta acima do título",
+  max: 30,
+  ajuda: "Diz ao visitante em que parte da página ele está. Deixe vazio para não mostrar.",
+  padrao,
+});
+
 export const ESTRUTURA = {
   hero: {
     titulo: "Topo",
@@ -62,6 +70,7 @@ export const ESTRUTURA = {
     titulo: "Antes × depois",
     descricao: "Comparação entre o improviso e a gestão com a Performei.",
     campos: {
+      etiqueta: etiqueta("Antes e depois"),
       titulo: { tipo: "texto", rotulo: "Título", max: 90, ajuda: `${DESTAQUE} Use ~til~ no trecho mais apagado.`, padrao: "Mesma empresa. ~Outro jeito de~ *administrar*." },
       texto: { tipo: "textarea", rotulo: "Texto ao lado do título", max: 240, padrao: "O improviso sai riscado, a gestão entra no lugar. Não é mágica: é método, número e acompanhamento." },
       rotulo_antes: { tipo: "texto", rotulo: "Nome da coluna “antes”", max: 30, padrao: "No improviso" },
@@ -86,6 +95,7 @@ export const ESTRUTURA = {
     titulo: "Serviços",
     descricao: "Os cartões que se empilham ao rolar. Cada posição tem uma cor fixa (branco, azul, escuro).",
     campos: {
+      etiqueta: etiqueta("Serviços"),
       titulo: { tipo: "texto", rotulo: "Título", max: 110, ajuda: DESTAQUE, padrao: "Três caminhos, um destino: uma empresa que *dá lucro* e tem rumo." },
       texto: { tipo: "textarea", rotulo: "Texto ao lado do título", max: 240, padrao: "Você não precisa contratar tudo de uma vez. Comece pelo que mais dói hoje. O diagnóstico mostra qual caminho faz mais diferença agora e qual pode esperar." },
       itens: {
@@ -128,6 +138,7 @@ export const ESTRUTURA = {
     titulo: "Para quem é",
     descricao: "Texto ao lado do checklist.",
     campos: {
+      etiqueta: etiqueta("Para quem é"),
       titulo: { tipo: "texto", rotulo: "Título", max: 90, ajuda: DESTAQUE, padrao: "Marcou dois ou mais? *É com você* que eu quero falar." },
       texto: { tipo: "textarea", rotulo: "Texto", max: 300, padrao: "Consultoria não precisa ser coisa de empresa grande. A Performei existe para o pequeno empresário que carrega o negócio nas costas e quer crescer com mais controle." },
     },
@@ -135,6 +146,7 @@ export const ESTRUTURA = {
   sobre: {
     titulo: "Sobre",
     campos: {
+      etiqueta: etiqueta("Sobre"),
       titulo: { tipo: "texto", rotulo: "Título", max: 100, ajuda: DESTAQUE, padrao: "Quero ajudar a transformar o Pará em um estado *mais empreendedor*." },
       texto: { tipo: "textarea", rotulo: "Texto", max: 1200, ajuda: "Deixe uma linha em branco entre os parágrafos. Use **dois asteriscos** para negrito.", padrao: "Oi! Eu sou o Rubens, apaixonado por empreendedorismo. Vejo todo dia pequenos empresários trabalhando demais e colhendo de menos, não por falta de esforço, mas por falta de alguém que traduza a gestão para a realidade deles.\n\nFui estudar e me especializar para isso. Hoje sou Administrador registrado no CRA-PA, consultor empresarial certificado pela Associação Comercial do Pará e fundador da Performei, com uma ideia simples: **consultoria mais acessível, próxima e fácil de entender.**" },
       foto: { tipo: "imagem", rotulo: "Foto", ajuda: "Foto vertical (4:5).", padrao: "/fotos/rubens-notebook.jpg" },
@@ -147,6 +159,7 @@ export const ESTRUTURA = {
     titulo: "Depoimentos",
     descricao: "O primeiro aparece grande, em azul.",
     campos: {
+      etiqueta: etiqueta("Depoimentos"),
       titulo: { tipo: "texto", rotulo: "Título", max: 70, ajuda: DESTAQUE, padrao: "Não acredite em mim. *Acredite neles.*" },
       itens: {
         tipo: "lista", rotulo: "Depoimentos", itemRotulo: "Depoimento", min: 1, maxItens: 5,
@@ -168,6 +181,7 @@ export const ESTRUTURA = {
   duvidas: {
     titulo: "Dúvidas",
     campos: {
+      etiqueta: etiqueta("Dúvidas"),
       titulo: { tipo: "texto", rotulo: "Título", max: 60, ajuda: DESTAQUE, padrao: "Ficou alguma *dúvida*?" },
       foto: { tipo: "imagem", rotulo: "Foto pequena", ajuda: "Aparece pequena e quadrada.", padrao: "/fotos/rubens-sala-reuniao.jpg" },
       texto: { tipo: "textarea", rotulo: "Texto ao lado da foto", max: 160, ajuda: "Use **dois asteriscos** para negrito.", padrao: "Se a sua dúvida não estiver aqui, me chama no WhatsApp. **Respondo pessoalmente.**" },
@@ -193,6 +207,7 @@ export const ESTRUTURA = {
     titulo: "Agendar",
     descricao: "A seção final, com o formulário.",
     campos: {
+      etiqueta: etiqueta("Agendar"),
       titulo: { tipo: "texto", rotulo: "Título", max: 60, ajuda: DESTAQUE, padrao: "Bora colocar *ordem na casa*?" },
       texto: { tipo: "textarea", rotulo: "Texto abaixo do título", max: 240, padrao: "Um bate-papo de 30 minutos, sem compromisso. A gente conversa sobre a sua empresa e você tira todas as dúvidas." },
       form_texto: { tipo: "textarea", rotulo: "Aviso abaixo do formulário", max: 200, padrao: "Leva 30 segundos. A mensagem chega no meu WhatsApp e eu respondo para combinar o melhor dia e horário." },

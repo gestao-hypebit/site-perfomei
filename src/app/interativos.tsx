@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 /* ---------- Pilha de cartões: informa a altura de cada um para o CSS ---------- */
@@ -36,7 +36,24 @@ const SINAIS = [
   "Quer crescer, contratar ou investir, mas não sabe se pode.",
 ];
 
-export function Checklist() {
+function Contador({ total, msg, className }: { total: number; msg: string; className: string }) {
+  return (
+    <div className={`items-center gap-5 ${className}`}>
+      <span className="pf-titulo text-[2.6rem] leading-none text-[#12163A]">{total}<span className="text-[#12163A]/30">/5</span></span>
+      <AnimatePresence mode="wait">
+        <motion.p key={msg} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="max-w-[18rem] font-medium text-[#12163A]">
+          {msg}
+        </motion.p>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+const atraso = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
+
+// Abaixo do desktop, título e contador trocam de lugar: o contador abre a seção e o título
+// fecha, junto do botão. Por isso os dois aparecem duas vezes, cada um visível em um tamanho.
+export function Checklist({ etiqueta, titulo, texto }: { etiqueta: ReactNode; titulo: ReactNode; texto: string }) {
   const [marcados, setMarcados] = useState<boolean[]>(() => SINAIS.map(() => false));
   const total = marcados.filter(Boolean).length;
   const msg =
@@ -45,7 +62,20 @@ export function Checklist() {
     "É com você que eu quero falar.";
 
   return (
-    <div>
+    <div className="mx-auto grid max-w-[1320px] gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-24">
+      <div className="lg:sticky lg:top-32 lg:self-start">
+        {etiqueta}
+        <div data-revelar style={atraso(100)} className="lg:hidden">
+          <Contador total={total} msg={msg} className="flex" />
+        </div>
+        <h2 data-revelar style={atraso(100)} className="pf-titulo hidden text-[3.6rem] leading-[1] lg:block">
+          {titulo}
+        </h2>
+        <p data-revelar style={atraso(200)} className="mt-8 max-w-md text-[17px] leading-[1.7] text-[#12163A]/65">
+          {texto}
+        </p>
+      </div>
+      <div data-revelar style={atraso(150)}>
       <ul className="space-y-3">
         {SINAIS.map((s, i) => {
           const on = marcados[i];
@@ -72,20 +102,15 @@ export function Checklist() {
       </ul>
 
       <div className="mt-8 flex flex-col gap-5 rounded-2xl bg-[#E7F6FF] p-6 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-5">
-          <span className="pf-titulo text-[2.6rem] leading-none text-[#12163A]">{total}<span className="text-[#12163A]/30">/5</span></span>
-          <AnimatePresence mode="wait">
-            <motion.p key={msg} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="max-w-[18rem] font-medium text-[#12163A]">
-              {msg}
-            </motion.p>
-          </AnimatePresence>
-        </div>
+        <Contador total={total} msg={msg} className="hidden lg:flex" />
+        <h2 className="pf-titulo text-[2rem] leading-[1] text-[#12163A] sm:text-[2.6rem] lg:hidden">{titulo}</h2>
         <a href="#agendar"
           className={`pf-botao inline-flex shrink-0 items-center justify-center gap-3 rounded-full px-6 py-3.5 text-[14px] font-semibold transition-all duration-500 ${
             total >= 2 ? "bg-[#12163A] text-white [--pf-preenche:#63C8FE] hover:text-[#12163A]" : "bg-[#12163A]/10 text-[#12163A]/50"
           }`}>
           Agendar diagnóstico →
         </a>
+      </div>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { Etiqueta } from "./etiqueta";
 
 // "Como funciona" como uma estrada: a seção fica presa e, conforme a pessoa rola para baixo,
 // os passos correm na horizontal. A linha de progresso acende cada parada e o passo ativo
@@ -51,13 +52,17 @@ export function Jornada() {
       style={{ height: fixo ? `calc(100svh + ${dist * 1.15}px)` : undefined }}
     >
       <div className={`${fixo ? "sticky top-0 h-[100svh]" : "py-24"} flex flex-col justify-center overflow-hidden`}>
-        <div className="mx-auto mb-10 flex w-full max-w-[1320px] flex-col gap-5 px-5 pt-20 sm:px-10 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
-          <h2 className="pf-titulo max-w-[13em] text-[2.2rem] leading-[1] sm:text-[3rem] lg:text-[3.6rem]">
+        {/* Seção presa na altura da tela: etiqueta e passo dividem a linha para não empurrar os cartões. */}
+        <div className="mx-auto mb-10 flex w-full max-w-[1320px] flex-col gap-4 px-5 pt-20 sm:px-10 lg:mb-14 [@media(max-height:720px)]:mb-4">
+          <div className="flex items-center justify-between gap-3">
+            <Etiqueta texto="Como funciona" tema="escuro" className="" />
+            <p className="pf-mono whitespace-nowrap text-[12px] uppercase tracking-[0.12em] text-white/50 sm:text-[13px] sm:tracking-[0.14em]">
+              Passo <span className="inline-block w-[2ch] text-[#63C8FE]">{num(Math.min(ativo, ETAPAS.length - 1))}</span> de 04
+            </p>
+          </div>
+          <h2 className="pf-titulo max-w-[13em] text-[2.2rem] leading-[1] sm:text-[3rem] lg:text-[3.6rem] lg:[@media(max-height:720px)]:max-w-none lg:[@media(max-height:720px)]:text-[2.6rem]">
             Do improviso ao <span className="pf-tarja">controle</span>, em quatro passos.
           </h2>
-          <p className="pf-mono text-[13px] uppercase tracking-[0.14em] text-white/50">
-            Passo <span className="inline-block w-[2ch] text-[#63C8FE]">{num(Math.min(ativo, ETAPAS.length - 1))}</span> de 04
-          </p>
         </div>
 
         <motion.div
